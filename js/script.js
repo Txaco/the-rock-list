@@ -3,9 +3,9 @@ let APP = (WINDOW => {
 	// DATA CONSTANTS
 	const DATA = {
 
-		clientId: 'dd2c1e54cc73415b99812e190b5afaa4',
-		clientSecret: 'c40f81e560bd4903a7575cfc0d8a3a35',
-		redirectUri: 'https://spotifytest.netlify.com',
+		clientId: '52993c4622e348bb8d60b1b5a3c4dfcf',
+		clientSecret: '283b2eb32d6c4112bd82c698f5588449',
+		redirectUri: 'https://the-rock-list.netlify.com',
 		authorizationTokensUri: 'https://accounts.spotify.com/api/token',
 		resultTypes: ['track', 'artist', 'album', 'playlist'],
 		fallbackImageUri: 'https://via.placeholder.com/64x64',
