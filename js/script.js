@@ -2,7 +2,6 @@ let APP = (WINDOW => {
 
 	// DATA CONSTANTS
 	const DATA = {
-
 		clientId: '52993c4622e348bb8d60b1b5a3c4dfcf',
 		clientSecret: '283b2eb32d6c4112bd82c698f5588449',
 		redirectUri: 'https://the-rock-list.netlify.com',
@@ -10,7 +9,6 @@ let APP = (WINDOW => {
 		resultTypes: ['track', 'artist', 'album', 'playlist'],
 		fallbackImageUri: 'https://via.placeholder.com/64x64',
 		resultLimit: 12
-
 	};
 	DATA.authorizationCodeUri = `
 		https://accounts.spotify.com/authorize?response_type=code&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
@@ -33,6 +31,7 @@ let APP = (WINDOW => {
 		credentials: 'same-origin',
 		headers: {}
 	};
+  
 	// SHARED OBJECTS
 	const SHARED = {
 		URL: WINDOW.URL,
@@ -42,9 +41,9 @@ let APP = (WINDOW => {
 		decode: WINDOW.decodeURIComponent,
 		fetch: WINDOW.fetch
 	};
+  
 	// HELPER FUNCTIONS
 	const HELPERS = {
-
 		getURLParams: () => {
 			let shared = HELPERS.getURLParams.shared;
 			let url = new shared.URL(shared.location);
@@ -59,13 +58,13 @@ let APP = (WINDOW => {
 				return null;
 			}
 		}
-
 	};
 	HELPERS.getURLParams.shared = {
 		URL: SHARED.URL,
 		location: SHARED.location,
 		URLParams: SHARED.URLSearchParams
 	};
+  
 	// PRODUCT VALUES
 	let PRODUCTS = {
 		accessToken: null,
@@ -162,6 +161,7 @@ let APP = (WINDOW => {
 	authorizationCode.helpers = {
 		getURLParams: HELPERS.getURLParams
 	};
+  
 	// Implicit grant flow
 	function implicitGrant() {
 		const data = implicitGrant.data, shared = implicitGrant.shared, helpers = implicitGrant.helpers;
@@ -185,6 +185,6 @@ let APP = (WINDOW => {
 		getURLParams: HELPERS.getURLParams
 	};
 
-	document.addEventListener('DOMContentLoaded', implicitGrant);
+	document.addEventListener('DOMContentLoaded', implicitGrant); // Add DOM load event
 
 })(window);
