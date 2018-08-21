@@ -111,7 +111,7 @@ let APP = (WINDOW => {
 			search(searchUri, data.searchOptions)
 				.then(response => response.json())
 					.then(results => displaySearchResults(results))
-						.catch(error => console.log(error));
+						.catch(error => shared.location.reload());
 		}
 	}
 	documentClick.data = {
@@ -120,7 +120,8 @@ let APP = (WINDOW => {
 	};
 	documentClick.shared = {
 		encode: SHARED.encode,
-		fetch: SHARED.fetch
+		fetch: SHARED.fetch,
+		location: SHARED.location
 	};
 
 	// Get DOM references and set DOM events (search click)
