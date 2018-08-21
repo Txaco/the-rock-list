@@ -112,7 +112,7 @@ let APP = (WINDOW => {
 			search(searchUri, data.searchOptions)
 				.then(response => response.json())
 					.then(results => displaySearchResults(results))
-						.catch(error => );
+						.catch(error => console.log(error));
 		}
 	}
 	documentClick.data = {
