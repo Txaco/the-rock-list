@@ -1,6 +1,7 @@
 body, h1, h2, h3, ul { margin: 0; } ul { list-style: none; padding: 0; }
 
 body {
+	min-height: 100vh;
 	font: 16px/1 sans-serif;
 }
 
