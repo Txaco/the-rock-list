@@ -1,8 +1,9 @@
 /* Reset */
 body, h1, h2, h3, ul { margin: 0; } ul { list-style: none; padding: 0; }
 
-/* Common Classes */
+/* Common classes */
 .center { text-align: center; }
+.column-half-width { width: 50%; float: left; }
 
 /* Elements */
 body {
@@ -10,6 +11,7 @@ body {
 	background-color: #000;
 }
 
+	/* Main wrapper */
 	main#main-wrapper {}
 
 		header#main-header {}
@@ -20,42 +22,72 @@ body {
 				font-weight: bold;
 			}
 
+		/* Main content */		
 		section#main-content {}
 
-	section.column-half-width {
-		width: 50%;
-		float: left;
-	}
+			/* Search wrapper */
+			section#search-wrapper {}
 
-		header#search-header {
-			display: flex;
-			flex-flow: row nowrap;
-			justify-content: center;
-		}
+				/* Search header */
+				header#search-header {
+					display: flex;
+					flex-flow: row nowrap;
+					justify-content: center;
+				}
+					input#search-input {}
+					button#search-button {}
 
-			li#track-results { background-color: #f66; }
-			li#artist-results { background-color: #6f6; }
-			li#album-results { background-color: #66f; }
-			li#playlist-results { background-color: #ff6; }
+				/* Search content */
+				ul#search-content {}
 
-					ul#search-content > li > ul > li {
-						width: 100%; height: 6.472em;
-						display: flex;
-						flex-flow: row nowrap;
-						align-items: center;
-					}
-					ul#search-content > li > ul > li:nth-child(odd) { background-color: rgba(255, 255, 255, .1); }
-					ul#search-content > li > ul > li:nth-child(even) { background-color: rgba(0, 0, 0, .1); }
+					/* Track results */
+					li#track-results { background-color: #f66; }
 
-						ul#search-content > li > ul > li > img {
-							padding-left: 1em;
-							height: 90%;
-						}
-						ul#search-content > li > ul > li > p {
-							padding-left: 1em;
-							width: 61.8%;
-							white-space: nowrap;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							font-size: 1.2em;
-						}
+					/* Artist results */
+					li#artist-results { background-color: #6f6; }
+
+					/* Album results */
+					li#album-results { background-color: #66f; }
+
+					/* Playlist results */
+					li#playlist-results { background-color: #ff6; }
+
+						/* Content header titles and container lists */
+						ul#search-content > li > h3 {}
+						ul#search-content > li > ul {}
+
+							/* Results items */
+							ul#search-content > li > ul > li {
+								width: 100%; height: 6.472em;
+								display: flex;
+								flex-flow: row nowrap;
+								align-items: center;
+							}
+							/* Result zebra background */
+							ul#search-content > li > ul > li:nth-child(odd) { background-color: rgba(255, 255, 255, .1); }
+							ul#search-content > li > ul > li:nth-child(even) { background-color: rgba(0, 0, 0, .1); }
+
+								/* Result images */
+								ul#search-content > li > ul > li > img {
+									padding-left: 1em;
+									height: 90%;
+								}
+								/* Result text paragraphs */
+								ul#search-content > li > ul > li > p {
+									padding-left: 1em;
+									width: 61.8%;
+									white-space: nowrap;
+									overflow: hidden;
+									text-overflow: ellipsis;
+									font-size: 1.2em;
+								}
+
+			/* Playlist wrapper */
+			section#playlist-wrapper {}
+
+				/* Playlist header */
+				header#playlist-header {}
+					h2#playlist-title {}
+
+				/* Playlist content */
+				ul#playlist-content {}
