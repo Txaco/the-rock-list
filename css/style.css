@@ -19,10 +19,10 @@ body {
 			justify-content: center;
 		}
 
-			li#track-results { background-color: #f44; }
-			li#artist-results { background-color: #4f4; }
-			li#album-results { background-color: #44f; }
-			li#playlist-results { background-color: #ff4; }
+			li#track-results { background-color: #f66; }
+			li#artist-results { background-color: #6f6; }
+			li#album-results { background-color: #66f; }
+			li#playlist-results { background-color: #ff6; }
 
 					ul#search-content > li > ul > li {
 						width: 100%; height: 6.472em;
