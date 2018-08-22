@@ -8,7 +8,8 @@ let APP = (WINDOW => {
 		authorizationTokensUri: 'https://accounts.spotify.com/api/token',
 		resultTypes: ['track', 'artist', 'album', 'playlist'],
 		fallbackImageUri: 'https://via.placeholder.com/64x64',
-		resultLimit: 12
+		resultLimit: 12,
+		queryFilters: [' track:', ' artist:', ' album:', ' genre:', ' year:']
 	};
 	DATA.authorizationCodeUri = `
 		https://accounts.spotify.com/authorize?response_type=code&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
@@ -103,8 +104,8 @@ let APP = (WINDOW => {
 	function documentClick(clickEvent) {
 		let data = documentClick.data, shared = documentClick.shared, search = shared.fetch;
 		if(clickEvent.target.id === 'search-button') {
-			let userInput = shared.encode(clickEvent.target.previousElementSibling.value);
-			let searchUri = data.searchUri + userInput;
+			let userInput = clickEvent.target.previousElementSibling.value;
+			let searchUri = data.searchUri + shared.encode(userInput);
 			if(!data.searchOptions.headers['Authorization']) {
 				data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
 			}
@@ -116,7 +117,8 @@ let APP = (WINDOW => {
 	}
 	documentClick.data = {
 		searchUri: DATA.searchUri,
-		searchOptions: DATA.searchOptions
+		searchOptions: DATA.searchOptions,
+		queryFilters: DATA.queryFilters
 	};
 	documentClick.shared = {
 		encode: SHARED.encode,
