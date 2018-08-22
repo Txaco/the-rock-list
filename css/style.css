@@ -43,16 +43,28 @@ body {
 				ul#search-content {}
 
 					/* Track results */
-					li#track-results { background-color: #f66; }
+					li#track-results {
+						padding: 1em;
+						background-color: #69D2E7;
+					}
 
 					/* Artist results */
-					li#artist-results { background-color: #6f6; }
+					li#artist-results {
+						padding: 1em;
+						background-color: #A7DBD8;
+					}
 
 					/* Album results */
-					li#album-results { background-color: #66f; }
+					li#album-results {
+						padding: 1em;
+						background-color: #E0E4CC;
+					}
 
 					/* Playlist results */
-					li#playlist-results { background-color: #ff6; }
+					li#playlist-results {
+						padding: 1em;
+						background-color: #F38630;
+					}
 
 						/* Content header titles */
 						ul#search-content > li > h3 {
@@ -79,6 +91,7 @@ body {
 								/* Result images */
 								ul#search-content > li > ul > li > img {
 									padding-left: 1em;
+									width: 90%;
 									height: 90%;
 								}
 								/* Result text paragraphs */
