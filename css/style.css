@@ -25,7 +25,9 @@ body {
 		/* Main content */		
 		section#main-content {}
 
-			/* Search wrapper */
+			/*****************
+			* Search wrapper *
+			*****************/
 			section#search-wrapper {}
 
 				/* Search header */
@@ -52,8 +54,14 @@ body {
 					/* Playlist results */
 					li#playlist-results { background-color: #ff6; }
 
-						/* Content header titles and container lists */
-						ul#search-content > li > h3 {}
+						/* Content header titles */
+						ul#search-content > li > h3 {
+							padding: 1em;
+							color: #fff;
+							font-size: 1.5em;
+							font-weight: bold;
+						}
+						/* Container lists */
 						ul#search-content > li > ul {}
 
 							/* Results items */
@@ -82,7 +90,9 @@ body {
 									font-size: 1.2em;
 								}
 
-			/* Playlist wrapper */
+			/*******************
+			* Playlist wrapper *
+			*******************/
 			section#playlist-wrapper {}
 
 				/* Playlist header */
