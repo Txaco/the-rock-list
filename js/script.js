@@ -86,7 +86,12 @@ let APP = (WINDOW => {
 				imgElement.src = item.images && item.images.length ?
 					item.images[item.images.length - 1].url : data.fallbackImageUri;
 				imgElement.alt = `${type} image`;
-				pElement.textContent = item.name;
+				if(type === 'track' || type === 'album') {
+					pElement.textContent = `${item.artists[0].name} | ${item.name}`;
+				}
+				else {
+					pElement.textContent = item.name;
+				}
 				itemElement.appendChild(imgElement);
 				itemElement.appendChild(pElement);
 				listElement.appendChild(itemElement);
