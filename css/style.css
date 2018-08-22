@@ -1,12 +1,26 @@
+/* Reset */
 body, h1, h2, h3, ul { margin: 0; } ul { list-style: none; padding: 0; }
 
+/* Common Classes */
+.center { text-align: center; }
+
+/* Elements */
 body {
 	font: 16px/1 sans-serif;
+	background-color: #000;
 }
 
-.center {
-	text-align: center;
-}
+	main#main-wrapper {}
+
+		header#main-header {}
+			h1#main-title {
+				padding: 1em;
+				color: #fff;
+				font-size: 2em;
+				font-weight: bold;
+			}
+
+		section#main-content {}
 
 	section.column-half-width {
 		width: 50%;
