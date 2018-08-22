@@ -57,7 +57,8 @@ body {
 						/* Content header titles */
 						ul#search-content > li > h3 {
 							padding: 1em;
-							color: #fff;
+							background-color: #fff;
+							color: #000;
 							font-size: 1.5em;
 							font-weight: bold;
 						}
@@ -72,8 +73,8 @@ body {
 								align-items: center;
 							}
 							/* Result zebra background */
-							ul#search-content > li > ul > li:nth-child(odd) { background-color: rgba(255, 255, 255, .1); }
-							ul#search-content > li > ul > li:nth-child(even) { background-color: rgba(0, 0, 0, .1); }
+							ul#search-content > li > ul > li:nth-child(odd) { background-color: rgba(255, 255, 255, .05); }
+							ul#search-content > li > ul > li:nth-child(even) { background-color: rgba(0, 0, 0, .05); }
 
 								/* Result images */
 								ul#search-content > li > ul > li > img {
