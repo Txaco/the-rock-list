@@ -36,8 +36,12 @@ body {
 					flex-flow: row nowrap;
 					justify-content: center;
 				}
-					input#search-input {}
-					button#search-button {}
+					input#search-input {
+						font: 2em sans-serif;
+					}
+					button#search-button {
+						font: 2em sans-serif;
+					}
 
 				/* Search content */
 				ul#search-content {}
