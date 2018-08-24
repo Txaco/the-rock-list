@@ -27,7 +27,7 @@ let APP = (WINDOW => {
 	DATA.implicitGrantUri =
 		`https://accounts.spotify.com/authorize?response_type=token&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
 	`;
-	DATA.searchUri = `https://api.spotify.com/v1/search?type=track&limit=${DATA.resultLimit}&q=`;
+	DATA.searchUri = `https://api.spotify.com/v1/search?type=track&limit=${DATA.resultLimit}&q=track:`;
 	DATA.searchOptions = {
 		credentials: 'same-origin',
 		headers: {}
@@ -93,7 +93,10 @@ let APP = (WINDOW => {
 					<div class="result-info">
 						<p class="result-info-artist">${item.artists[0].name}</p>
 						<p class="result-info-title">${item.name}</p>
-						<p class="result-info-album">${item.album.name}</p>
+						<p class="result-info-album">
+							<span>From the album&nbsp;</span>
+							<span>${item.album.name}</span>
+						</p>
 					</div>
 
 				</li>
