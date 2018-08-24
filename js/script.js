@@ -7,7 +7,7 @@ let APP = (WINDOW => {
 		redirectUri: 'https://the-rock-list.netlify.com',
 		authorizationTokensUri: 'https://accounts.spotify.com/api/token',
 		resultTypes: ['track', 'artist', 'album', 'playlist'],
-		fallbackImageUri: 'https://via.placeholder.com/64x64',
+		fallbackImageUri: 'https://via.placeholder.com/512x512',
 		resultLimit: 12,
 		queryFilters: [' track:', ' artist:', ' album:', ' genre:', ' year:']
 	};
@@ -27,7 +27,7 @@ let APP = (WINDOW => {
 	DATA.implicitGrantUri =
 		`https://accounts.spotify.com/authorize?response_type=token&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
 	`;
-	DATA.searchUri = `https://api.spotify.com/v1/search?type=${DATA.resultTypes.join(',')}&limit=${DATA.resultLimit}&q=`;
+	DATA.searchUri = `https://api.spotify.com/v1/search?type=track&limit=${DATA.resultLimit}&q=`;
 	DATA.searchOptions = {
 		credentials: 'same-origin',
 		headers: {}
@@ -74,7 +74,8 @@ let APP = (WINDOW => {
 
 	// Append results to DOM
 	function displaySearchResults(results) {
-		let data = displaySearchResults.data, shared = displaySearchResults.shared;
+		console.log(results);
+		/*let data = displaySearchResults.data, shared = displaySearchResults.shared;
 		let wrapper, listElement, itemElement, imgElement, textNode;
 		for(let type of data.resultTypes) {
 			wrapper = shared[`${type}Results`];
@@ -97,7 +98,7 @@ let APP = (WINDOW => {
 				listElement.appendChild(itemElement);
 			}
 			wrapper.replaceChild(listElement, wrapper.lastElementChild);
-		}
+		}*/
 	}
 	displaySearchResults.data = {
 		resultTypes: DATA.resultTypes,
@@ -134,40 +135,12 @@ let APP = (WINDOW => {
 	// Get DOM references and set DOM events (search click)
 	function workWithDOM() {
 		let data = workWithDOM.data;
-		for(let type of data.resultTypes) {
-			displaySearchResults.shared[`${type}Results`] = document.getElementById(`${type}-results`);
-		}
+		displaySearchResults.shared.searchSectionNode = document.getElementById('search-section');
 		documentClick.shared.fetch = window.fetch;
 		document.addEventListener('click', documentClick);
 	}
 	workWithDOM.data = {
 		resultTypes: DATA.resultTypes
-	};
-
-	// Authorization code flow
-	function authorizationCode() {
-		const data = authorizationCode.data, shared = authorizationCode.shared, helpers = authorizationCode.helpers;
-		let urlParams = helpers.getURLParams();
-		if(!urlParams) {
-			shared.location.replace(data.codeUri);
-		}
-		else if(urlParams.has('code')) {
-			let code = urlParams.get('code');
-			data.tokenOptions.body.code = code;
-			shared.fetch(data.tokenUri, data.tokenOptions).then(response => console.log(response.json()));
-		}
-	}
-	authorizationCode.data = {
-		codeUri: DATA.authorizationCodeUri,
-		tokenUri: DATA.authorizationTokensUri,
-		tokenOptions: DATA.authorizationTokenOptions
-	};
-	authorizationCode.shared = {
-		location: SHARED.location,
-		fetch: SHARED.fetch
-	};
-	authorizationCode.helpers = {
-		getURLParams: HELPERS.getURLParams
 	};
   
 	// Implicit grant flow
@@ -196,3 +169,33 @@ let APP = (WINDOW => {
 	document.addEventListener('DOMContentLoaded', implicitGrant); // Add DOM load event
 
 })(window);
+
+/* NOTES
+
+	// Authorization code flow
+	function authorizationCode() {
+		const data = authorizationCode.data, shared = authorizationCode.shared, helpers = authorizationCode.helpers;
+		let urlParams = helpers.getURLParams();
+		if(!urlParams) {
+			shared.location.replace(data.codeUri);
+		}
+		else if(urlParams.has('code')) {
+			let code = urlParams.get('code');
+			data.tokenOptions.body.code = code;
+			shared.fetch(data.tokenUri, data.tokenOptions).then(response => console.log(response.json()));
+		}
+	}
+	authorizationCode.data = {
+		codeUri: DATA.authorizationCodeUri,
+		tokenUri: DATA.authorizationTokensUri,
+		tokenOptions: DATA.authorizationTokenOptions
+	};
+	authorizationCode.shared = {
+		location: SHARED.location,
+		fetch: SHARED.fetch
+	};
+	authorizationCode.helpers = {
+		getURLParams: HELPERS.getURLParams
+	};
+
+*/
