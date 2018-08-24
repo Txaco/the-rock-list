@@ -144,7 +144,7 @@ let APP = (WINDOW => {
 	};
   
 	// Implicit grant flow
-	function implicitGrant() {
+	function implicitGrant() {alert();
 		const data = implicitGrant.data, shared = implicitGrant.shared, helpers = implicitGrant.helpers;
 		let urlParams = helpers.getURLParams();
 		if(!urlParams) {
