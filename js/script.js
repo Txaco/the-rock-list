@@ -75,7 +75,9 @@ let APP = (WINDOW => {
 	// Append results to DOM
 	function displaySearchResults(results) {
 		console.log(results);
-		/*let data = displaySearchResults.data, shared = displaySearchResults.shared;
+		/* Build Results Views
+		
+		let data = displaySearchResults.data, shared = displaySearchResults.shared;
 		let wrapper, listElement, itemElement, imgElement, textNode;
 		for(let type of data.resultTypes) {
 			wrapper = shared[`${type}Results`];
@@ -98,7 +100,9 @@ let APP = (WINDOW => {
 				listElement.appendChild(itemElement);
 			}
 			wrapper.replaceChild(listElement, wrapper.lastElementChild);
-		}*/
+		}
+		
+		*/
 	}
 	displaySearchResults.data = {
 		resultTypes: DATA.resultTypes,
@@ -132,12 +136,13 @@ let APP = (WINDOW => {
 		location: SHARED.location
 	};
 
-	// Get DOM references and set DOM events (search click)
+	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
 		let data = workWithDOM.data;
 		displaySearchResults.shared.searchSectionNode = document.getElementById('search-section');
 		documentClick.shared.fetch = window.fetch;
 		document.addEventListener('click', documentClick);
+		document.body.style.display = 'block'; // Show APP !!!
 	}
 	workWithDOM.data = {
 		resultTypes: DATA.resultTypes
