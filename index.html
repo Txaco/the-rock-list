@@ -1,82 +1,59 @@
-<!doctype html>
-	<html lang="es">
+<!DOCTYPE html>
+<html lang="es">
+
+	<head>
+
+		<title></title>
+		<meta charset="utf-8" />
+		<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+
+	</head>
+
+	<body>
 		
-		<head>
-			<title>SPOTIFY TEST</title>
-			<meta charset="utf-8" />
-			<link rel="stylesheet" href="css/style.css" />
-			<script src="js/script.js"></script>
-		</head>
-		
-		<body>
+		<!-- Wrapper Div -->
+		<div id="wrapper-div">
 			
-			<!-- Main Wrapper -->
-			<main id="main-wrapper">
+			<!-- Main Header -->
+			<header id="main-header">
+				<h1 id="main-header-title">THE ROCK LIST</h1>
+				<p id="main-header-legend">For musicians</p>
+			</header>
+			
+			<!-- Main Content -->
+			<main id="main-content">
 				
-				<!-- Main Header -->
-				<header id="main-header">
-					<h1 id="main-title" class="center">THE ROCK LIST</h1> <!-- Title -->
-				</header>
-				
-				<!-- Main Content -->
-				<section id="main-content">
+				<!-- Search Section -->
+				<section id="search-section">
 					
-					<!-- Search Wrapper -->
-					<section id="search-wrapper" class="column-half-width">
-						
-						<!-- Search Header -->
-						<header id="search-header">
-							<input id="search-input" name="search-input" type="text" placeholder="Track, artist, album, playlist..." /> <!-- Input -->
-							<button id="search-button" type="button">SEARCH</button> <!-- Button -->
-						</header>
-						
-						<!-- Search Content -->
-						<ul id="search-content">
-							
-							<!-- Track results wrapper (append new results) -->
-							<li id="track-results">
-								<h3 class="center">TRACKS</h3>
-								<ul></ul> <!-- Track results list (replace with new results) -->
-							</li>
-							
-							<!-- Artist results wrapper (append new results) -->
-							<li id="artist-results">
-								<h3 class="center">ARTISTS</h3>
-								<ul></ul> <!-- Artist results list (replace with new results) -->
-							</li>
-							
-							<!-- Album results wrapper (append new results) -->
-							<li id="album-results">
-								<h3 class="center">ALBUMS</h3>
-								<ul></ul> <!-- Album results list (replace with new results) -->
-							</li>
-							
-							<!-- Playlist results wrapper (append new results) -->
-							<li id="playlist-results">
-								<h3 class="center">PLAYLISTS</h3>
-								<ul></ul> <!-- Playlist results list (replace with new results) -->
-							</li>
-						
-						</ul>
+					<!-- Search Nav -->
+					<nav id="search-nav">
+						<input id="search-input" name="search-input" type="text" placeholder="Track, artist, album, playlist..." />
+						<button id="search-button" type="button">GO!</button>
+					</nav>
 					
-					</section>
+					<!-- Search Results -->
+					<ul id="search-results">
 					
-					<!-- Playlist Wrapper -->
-					<section id="playlist-wrapper" class="column-half-width">
-						
-						<!-- Playlist Header -->
-						<header id="playlist-header">
-							<h2 id="playlist-title" class="center">PLAYLIST</h2> <!-- Title -->
-						</header>
-						
-						<ul id="playlist-content"></ul> <!-- playlist content (add user selections) -->
-					
-					</section>
-				
 				</section>
-			
-			</main>
-		
-		</body>
+					
+				<!-- User Section -->
+				<section id="user-section">
+					
+					<!-- User Header -->
+					<header id="user-header">
+						<h2 id="user-header-title">SET-LIST</h2>
+					</header>
+					
+					<!-- User Items List -->
+					<ul id="user-items"></ul>
+
+				</section>
+
+			</section>
+
+		</div>
+
+	</body>
 
 </html>
