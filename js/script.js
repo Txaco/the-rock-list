@@ -139,14 +139,11 @@ let APP = (WINDOW => {
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
 		let data = workWithDOM.data;
-		displaySearchResults.shared.searchSectionNode = document.getElementById('search-section');
+		displaySearchResults.shared.searchResultsList = document.getElementById('search-results');
 		documentClick.shared.fetch = window.fetch;
 		document.addEventListener('click', documentClick);
 		document.body.style.display = 'block'; // Show APP !!!
 	}
-	workWithDOM.data = {
-		resultTypes: DATA.resultTypes
-	};
   
 	// Implicit grant flow
 	function implicitGrant() {
