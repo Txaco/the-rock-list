@@ -1,121 +1,143 @@
-/* Reset */
-body, h1, h2, h3, ul { margin: 0; } ul { list-style: none; padding: 0; }
+body, ul, p, h1, h2, h3, h4, h5 { margin: 0; } ul { list-style: none; padding: 0; } * { box-sizing: border-box; }
 
-/* Common classes */
-.center { text-align: center; }
-.column-half-width { width: 50%; float: left; }
+body, html { width: 100vw; height: 100vh; }
 
-/* Elements */
-body {
-	font: 16px/1 sans-serif;
-	background-color: #000;
+body { display: none; } /* JS Decides... */
+
+
+/* Wrapper */
+div#wrapper-div {
+	width: 100%; height: 100%;
+	font-family: 'Raleway';
+	line-height: 1;
 }
 
-	/* Main wrapper */
-	main#main-wrapper {}
+	/* Main Header */
+	header#main-header {
+		width: 100%; height: 10%;
+	}
+		h1#main-header-title {
+			width: 50%; height: 100%; float: left;
+			display: flex; justify-content: center; align-items: center;
+			background: black; color: #fff;
+			font-size: 8vh; font-weight: 900;
+		}
+		p#main-header-legend {
+			width: 50%; height: 100%; float: left;
+			display: flex; justify-content: center; align-items: center;
+			font-size: 6vh; font-weight: 100; font-style: italic;
+			background: black; color: #fff;
+		}
 
-		header#main-header {}
-			h1#main-title {
-				padding: 1em;
-				color: #fff;
-				font-size: 2em;
-				font-weight: bold;
+	/* Main Content */
+	main#main-content {
+		width: 100%; height: 90%;
+	}
+
+		/* Search Section */
+		section#search-section {
+			width: 50%; height: 100%; float: left;
+		}
+
+			/* Search Nav */
+			nav#search-nav {
+				width: 100%; height: 20%;
+				display: flex; justify-content: space-evenly; align-items: center;
+			}
+				input#search-input {
+					width: 75%; height: 61.8%;
+					padding: 2%;
+					font-size: 5vh; font-weight: 600;
+				}
+				input#search-input::placeholder {
+					font-size: 3.5vh; font-weight: 500; font-style: italic;
+					text-align: center;
+				}
+				button#search-button {
+					width: 20%; height: 61.8%;
+					font-size: 5vh; font-weight: 900;
+				}
+
+			/* Search Results List */
+			ul#search-results {
+				width: 100%; height: 80%; display: flex; flex-flow: column nowrap; align-items: center;
+				overflow: auto;
 			}
 
-		/* Main content */		
-		section#main-content {}
-
-			/*****************
-			* Search wrapper *
-			*****************/
-			section#search-wrapper {}
-
-				/* Search header */
-				header#search-header {
-					display: flex;
-					flex-flow: row nowrap;
-					justify-content: center;
+				/* Result Item */
+				li.result {
+					width: 96%; height: 23%; margin-bottom: 2%;
+					border-top: 1px solid #ccc; border-radius: 4px;
+					box-shadow: 0 2px 1px #777;
+					background: #fff;
 				}
-					input#search-input {
-						font: 2em sans-serif;
+					/* Item Image */
+					div.result-image {
+						height: 100%; float: left;
 					}
-					button#search-button {
-						font: 2em sans-serif;
-					}
-
-				/* Search content */
-				ul#search-content {}
-
-					/* Track results */
-					li#track-results {
-						padding: 1em;
-						background-color: #69D2E7;
-					}
-
-					/* Artist results */
-					li#artist-results {
-						padding: 1em;
-						background-color: #A7DBD8;
-					}
-
-					/* Album results */
-					li#album-results {
-						padding: 1em;
-						background-color: #E0E4CC;
-					}
-
-					/* Playlist results */
-					li#playlist-results {
-						padding: 1em;
-						background-color: #F38630;
-					}
-
-						/* Content header titles */
-						ul#search-content > li > h3 {
-							padding: 1em;
-							background-color: #fff;
-							color: #000;
-							font-size: 1.5em;
-							font-weight: bold;
+						div.result-image > img {
+							height: 100%; display: block;
 						}
-						/* Container lists */
-						ul#search-content > li > ul {}
-
-							/* Results items */
-							ul#search-content > li > ul > li {
-								width: 100%; height: 6.472em;
-								display: flex;
-								flex-flow: row nowrap;
-								align-items: center;
+					/* Item Info */
+					div.result-info {
+						height: 100%;
+						display: flex; flex-flow: column nowrap; justify-content: space-between;
+					}
+						div.result-info > p {
+							padding: 2%;
+							overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+						}
+						p.result-info-artist {
+							font-size: 3.5vh; font-weight: 500;
+							text-transform: uppercase;
+						}
+						p.result-info-title {
+							font-size: 4vh; font-weight: 900;
+						}
+						p.result-info-album {
+							font-size: 2vh;
+							align-self: flex-end;
+						}
+							span.result-info-album-legend {
+								font-style: italic; font-weight: 400;
 							}
-							/* Result zebra background */
-							ul#search-content > li > ul > li:nth-child(odd) { background-color: rgba(255, 255, 255, .05); }
-							ul#search-content > li > ul > li:nth-child(even) { background-color: rgba(0, 0, 0, .05); }
+							span.result-info-album-title {
+								font-weight: 700;
+							}
 
-								/* Result images */
-								ul#search-content > li > ul > li > img {
-									padding-left: 1em;
-									width: 90%;
-									height: 90%;
-								}
-								/* Result text paragraphs */
-								ul#search-content > li > ul > li > p {
-									padding-left: 1em;
-									width: 61.8%;
-									white-space: nowrap;
-									overflow: hidden;
-									text-overflow: ellipsis;
-									font-size: 1.2em;
-								}
+		/* User Section */
+		section#user-section {
+			width: 50%; height: 100%; float: left;
+		}
 
-			/*******************
-			* Playlist wrapper *
-			*******************/
-			section#playlist-wrapper {}
+			/* User Header */
+			header#user-header {
+				width: 100%; height: 10%;
+			}
+				h2#user-header-title {
+					width: 100%; height: 100%;
+					display: flex; justify-content: center; align-items: center;
+					font-size: 5vh; font-weight: 900;
+					text-decoration: underline;
+				}
 
-				/* Playlist header */
-				header#playlist-header {}
-					h2#playlist-title {}
-
-				/* Playlist content */
-				ul#playlist-content {}
+			/* User Items List */
+			ul#user-items {
+				width: 100%; height: 90%;
+				padding: 2%;
+				overflow: auto;
+			}
+				li.item {
+					width: 100%; height: 7%;
+				}
+					li.item > p {
+						width: 50%; height: 100%; float: left;
+						font-size: 3vh;
+					}
+					p.item-artist {
+						text-transform: uppercase;
+						font-weight: 500;
+					}
+					p.item-title {
+						font-weight: 900;
+					}
