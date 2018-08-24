@@ -74,38 +74,38 @@ let APP = (WINDOW => {
 
 	// Append results to DOM
 	function displaySearchResults(results) {
-		console.log(results);
-		/* Build Results Views
-		
+
 		let data = displaySearchResults.data, shared = displaySearchResults.shared;
-		let wrapper, listElement, itemElement, imgElement, textNode;
-		for(let type of data.resultTypes) {
-			wrapper = shared[`${type}Results`];
-			listElement = document.createElement('ul');
-			for(let item of results[`${type}s`].items) {
-				itemElement = document.createElement('li');
-				imgElement = document.createElement('img');
-				pElement = document.createElement('p');
-				imgElement.src = item.images && item.images.length ?
-					item.images[item.images.length - 1].url : data.fallbackImageUri;
-				imgElement.alt = `${type} image`;
-				if(type === 'track' || type === 'album') {
-					pElement.textContent = `${item.artists[0].name} | ${item.name}`;
-				}
-				else {
-					pElement.textContent = item.name;
-				}
-				itemElement.appendChild(imgElement);
-				itemElement.appendChild(pElement);
-				listElement.appendChild(itemElement);
-			}
-			wrapper.replaceChild(listElement, wrapper.lastElementChild);
+		let htmlItems = ''; let imageSrc;
+
+		for(let item of results.tracks.items) {
+
+			imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+
+			htmlItems += `
+
+				<li class="result">
+
+					<div class="result-image">
+						<img src="${imageSrc}" alt="Track Image" />
+					</div>
+
+					<div class="result-info">
+						<p class="result-info-artist">${item.artists[0].name}</p>
+						<p class="result-info-title">${item.name}</p>
+						<p class="result-info-album">${item.album.name}</p>
+					</div>
+
+				</li>
+
+			`;
+
 		}
-		
-		*/
+
+		shared.searchResultsList.innerHTML = htmlItems;
+
 	}
 	displaySearchResults.data = {
-		resultTypes: DATA.resultTypes,
 		fallbackImageUri: DATA.fallbackImageUri
 	};
 	displaySearchResults.shared = {};
