@@ -6,7 +6,6 @@ let APP = (WINDOW => {
 		clientSecret: '283b2eb32d6c4112bd82c698f5588449',
 		redirectUri: 'https://the-rock-list.netlify.com',
 		authorizationTokensUri: 'https://accounts.spotify.com/api/token',
-		resultTypes: ['track', 'artist', 'album', 'playlist'],
 		fallbackImageUri: 'https://via.placeholder.com/512x512',
 		resultLimit: 12,
 		queryFilters: [' track:', ' artist:', ' album:', ' genre:', ' year:']
@@ -27,7 +26,7 @@ let APP = (WINDOW => {
 	DATA.implicitGrantUri =
 		`https://accounts.spotify.com/authorize?response_type=token&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
 	`;
-	DATA.searchUri = `https://api.spotify.com/v1/search?type=track&limit=${DATA.resultLimit}&q=track:`;
+	DATA.searchUri = `https://api.spotify.com/v1/search?type=artist&limit=${DATA.resultLimit}&q=track:`;
 	DATA.searchOptions = {
 		credentials: 'same-origin',
 		headers: {}
@@ -64,12 +63,6 @@ let APP = (WINDOW => {
 		URL: SHARED.URL,
 		location: SHARED.location,
 		URLParams: SHARED.URLSearchParams
-	};
-  
-	// PRODUCT VALUES
-	let PRODUCTS = {
-		accessToken: null,
-		refreshToken: null
 	};
 
 	// Append results to DOM
