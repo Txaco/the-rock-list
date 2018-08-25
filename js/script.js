@@ -94,7 +94,7 @@ let APP = (WINDOW => {
 						<p class="result-info-artist">${item.artists[0].name}</p>
 						<p class="result-info-title">${item.name}</p>
 						<p class="result-info-album">
-							<span class="result-info-album-legend">From the album&nbsp;</span>
+							<span class="result-info-album-legend">From the ${item.album.album_type}&nbsp;</span>
 							<span class="result-info-album-title">${item.album.name}</span>
 						</p>
 					</div>
