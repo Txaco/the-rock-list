@@ -100,7 +100,6 @@ div#wrapper-div {
 						}
 						p.result-info-album {
 							font-size: 2vh;
-							align-self: flex-end;
 						}
 							span.result-info-album-legend {
 								font-style: italic; font-weight: 400;
