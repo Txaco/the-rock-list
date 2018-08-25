@@ -67,7 +67,7 @@ div#wrapper-div {
 
 				/* Result Item */
 				li.result {
-					width: 96%; height: 23%; margin-bottom: 2%;
+					width: 96%; height: 23%; margin-bottom: 1.4vh;
 					border-top: 1px solid #ccc; border-radius: 4px;
 					box-shadow: 0 2px 1px #777;
 					background: #fff;
