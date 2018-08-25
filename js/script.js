@@ -26,7 +26,7 @@ let APP = (WINDOW => {
 	DATA.implicitGrantUri =
 		`https://accounts.spotify.com/authorize?response_type=token&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
 	`;
-	DATA.searchUri = `https://api.spotify.com/v1/search?type=artist&limit=${DATA.resultLimit}&q=track:`;
+	DATA.searchUri = `https://api.spotify.com/v1/search?type=track&limit=${DATA.resultLimit}&q=track:`;
 	DATA.searchOptions = {
 		credentials: 'same-origin',
 		headers: {}
@@ -108,23 +108,29 @@ let APP = (WINDOW => {
 
 	// Click handler for user search
 	function documentClick(clickEvent) {
+		
 		let data = documentClick.data, shared = documentClick.shared, search = shared.fetch;
+		
 		if(clickEvent.target.id === 'search-button') {
+			
 			let userInput = clickEvent.target.previousElementSibling.value;
 			let searchUri = data.searchUri + shared.encode(userInput);
+			
 			if(!data.searchOptions.headers['Authorization']) {
 				data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
 			}
+			
 			search(searchUri, data.searchOptions)
 				.then(response => response.json())
 					.then(results => displaySearchResults(results))
 						.catch(error => shared.location.reload());
+			
 		}
+		
 	}
 	documentClick.data = {
 		searchUri: DATA.searchUri,
-		searchOptions: DATA.searchOptions,
-		queryFilters: DATA.queryFilters
+		searchOptions: DATA.searchOptions
 	};
 	documentClick.shared = {
 		encode: SHARED.encode,
@@ -134,24 +140,37 @@ let APP = (WINDOW => {
 
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
+		
 		let data = workWithDOM.data;
+		
 		displaySearchResults.shared.searchResultsList = document.getElementById('search-results');
 		documentClick.shared.fetch = window.fetch;
+		
 		document.addEventListener('click', documentClick);
+		
 		document.body.style.display = 'block'; // Show APP !!!
+		
 	}
   
 	// Implicit grant flow
 	function implicitGrant() {
+		
 		const data = implicitGrant.data, shared = implicitGrant.shared, helpers = implicitGrant.helpers;
+		
 		let urlParams = helpers.getURLParams();
+		
 		if(!urlParams) {
 			shared.location.replace(data.uri);
 		}
+		
 		else if(urlParams.has('access_token') && urlParams.has('token_type') && urlParams.has('expires_in')) {
+			
 			shared.location.hash = '';
+			
 			documentClick.data.accessToken = urlParams.get('access_token');
+			
 			workWithDOM();
+			
 		}
 	}
 	implicitGrant.data = {
