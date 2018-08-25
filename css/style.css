@@ -61,12 +61,13 @@ div#wrapper-div {
 			/* Search Results List */
 			ul#search-results {
 				width: 100%; height: 80%; display: flex; flex-flow: column nowrap; align-items: center;
+				margin-bottom: 2%;
 				overflow: auto;
 			}
 
 				/* Result Item */
 				li.result {
-					width: 96%; height: 23%; margin: 1% 0;
+					width: 96%; height: 23%; margin-bottom: 2%;
 					border-top: 1px solid #ccc; border-radius: 4px;
 					box-shadow: 0 2px 1px #777;
 					background: #fff;
