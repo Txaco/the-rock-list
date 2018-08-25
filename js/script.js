@@ -109,21 +109,26 @@ let APP = (WINDOW => {
 	// Click handler for user search
 	function documentClick(clickEvent) {
 		
-		let data = documentClick.data, shared = documentClick.shared, search = shared.fetch;
-		
 		if(clickEvent.target.id === 'search-button') {
 			
 			let userInput = clickEvent.target.previousElementSibling.value;
-			let searchUri = data.searchUri + shared.encode(userInput);
 			
-			if(!data.searchOptions.headers['Authorization']) {
-				data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
+			if(userInput) {
+			
+				let data = documentClick.data, shared = documentClick.shared, search = shared.fetch;
+				
+				let searchUri = data.searchUri + shared.encode(userInput);
+				
+				if(!data.searchOptions.headers['Authorization']) {
+					data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
+				}
+				
+				search(searchUri, data.searchOptions)
+					.then(response => response.json())
+						.then(results => displaySearchResults(results))
+							.catch(error => console.log(error)); /*shared.location.reload()*/
+			
 			}
-			
-			search(searchUri, data.searchOptions)
-				.then(response => response.json())
-					.then(results => displaySearchResults(results))
-						.catch(error => console.log(error)); /*shared.location.reload()*/
 			
 		}
 		
