@@ -123,7 +123,7 @@ let APP = (WINDOW => {
 			search(searchUri, data.searchOptions)
 				.then(response => response.json())
 					.then(results => displaySearchResults(results))
-						.catch(error => shared.location.reload());
+						.catch(error => console.log(error)); /*shared.location.reload()*/
 			
 		}
 		
