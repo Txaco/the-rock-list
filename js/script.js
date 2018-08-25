@@ -69,33 +69,42 @@ let APP = (WINDOW => {
 	function displaySearchResults(results) {
 
 		let data = displaySearchResults.data, shared = displaySearchResults.shared;
-		let htmlItems = ''; let imageSrc;
+		
+		let htmlItems = '';
+		
+		if(results.tracks.items.length) {
+		
+			let imageSrc;
+			
+			for(let item of results.tracks.items) {
 
-		for(let item of results.tracks.items) {
+				imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
 
-			imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+				htmlItems += `<li class="result">
 
-			htmlItems += `
+												<div class="result-image">
+													<img src="${imageSrc}" alt="Track Image" />
+												</div>
 
-				<li class="result">
+												<div class="result-info">
+													<p class="result-info-artist">${item.artists[0].name}</p>
+													<p class="result-info-title">${item.name}</p>
+													<p class="result-info-album">
+														<span class="result-info-album-legend">From the ${item.album.album_type}&nbsp;</span>
+														<span class="result-info-album-title">${item.album.name}</span>
+													</p>
+											</div>
+					
+										</li>`;
 
-					<div class="result-image">
-						<img src="${imageSrc}" alt="Track Image" />
-					</div>
-
-					<div class="result-info">
-						<p class="result-info-artist">${item.artists[0].name}</p>
-						<p class="result-info-title">${item.name}</p>
-						<p class="result-info-album">
-							<span class="result-info-album-legend">From the ${item.album.album_type}&nbsp;</span>
-							<span class="result-info-album-title">${item.album.name}</span>
-						</p>
-					</div>
-
-				</li>
-
-			`;
-
+			}
+		
+		}
+		
+		else {
+		
+			htmlItems += `<li class="no-results">Sorry, no results!</li>`;
+		
 		}
 
 		shared.searchResultsList.innerHTML = htmlItems;
