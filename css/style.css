@@ -152,6 +152,17 @@ body {
 				flex-flow: row nowrap;
 				background: #fff;
 			}
+			li.no-results {
+				height: calc(25% - 1.25rem);
+				margin: 1rem 0;
+				border: solid 1px #000;
+				box-sizing: border-box;
+				display: flex;
+				flex-flow: row nowrap;
+				background: #fff;
+				font-size: 2rem;
+				font-weight: 900;
+			} 
 			li.result-item > img {
 				display: block;
 				height: 100%;
@@ -170,18 +181,15 @@ body {
 				text-overflow: ellipsis;
 			}
 			h5.result-artist {
-				grid-area: result-artist;
 				text-transform: uppercase;
 				font-size: 1.5rem;
 				font-weight: 500;
 			}
 			h4.result-title {
-				grid-area: result-title;
 				font-size: 2rem;
 				font-weight: 900;
 			}
 			h6.result-album {
-				grid-area: result-album;
 				font-size: 1rem;
 				font-weight: 300;
 			}
