@@ -103,7 +103,7 @@ let APP = (WINDOW => {
 
 			else {
 
-				htmlItems += `<li class="no-results">Lo siento, no tenemos ese tema.</li>`;
+				htmlItems += `<li class="no-results">Pues no, no tenemos ese tema.</li>`;
 
 			}
 
@@ -143,7 +143,7 @@ let APP = (WINDOW => {
 
 			else {
 
-				htmlItems += `<li class="no-results">Lo siento, no tenemos ese artista.</li>`;
+				htmlItems += `<li class="no-results">Pues no, no tenemos ese artista.</li>`;
 
 			}
 
@@ -171,7 +171,7 @@ let APP = (WINDOW => {
 							<div>
 								<h5 class="result-artist result-info">${artists}</h5>
 								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">${type} con fecha:&nbsp;<span>${item.release_date}</span></h6>
+								<h6 class="result-album result-info">${type} &#8471;&copysr;<span>${item.release_date}</span></h6>
 							</div>
 
 						</li>
@@ -184,7 +184,7 @@ let APP = (WINDOW => {
 
 			else {
 
-				htmlItems += `<li class="no-results">Lo siento, no tenemos ese álbum.</li>`;
+				htmlItems += `<li class="no-results">Pues no, no tenemos ese álbum.</li>`;
 
 			}
 
