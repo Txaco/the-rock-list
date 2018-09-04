@@ -160,7 +160,7 @@ let APP = (WINDOW => {
 				for(let item of results.albums.items) {
 
 					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
-					artists = item.artists.map(artist => artist.name),join( | );
+					artists = item.artists.map(artist => artist.name).join('|');
 
 					htmlItems += `
 
