@@ -153,8 +153,9 @@ body {
 				background: #fff;
 			}
 			li.no-results {
-				margin: 2rem auto;
+				margin-top: 2rem;
 				background: #fff;
+				text-align: center;
 				font-size: 2rem;
 				font-weight: 900;
 			} 
