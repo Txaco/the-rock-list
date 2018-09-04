@@ -155,7 +155,6 @@ body {
 			li.no-results {
 				height: calc(25% - 1.25rem);
 				margin: 1rem 0;
-				border: solid 1px #000;
 				box-sizing: border-box;
 				display: flex;
 				flex-flow: row nowrap;
