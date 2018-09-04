@@ -221,10 +221,15 @@ let APP = (WINDOW => {
 
 					URI = `${data.searchUri}&type=${type}&q=${type}:${input}`;
 
-					search(URI, data.searchOptions)
-						.then(response => response.json())
-							.then(results => displaySearchResults(results))
-								.catch(error => console.log(error)); /*shared.location.reload()*/
+					search(URI, data.searchOptions).then(response => {
+						if(response.status === 401) {
+							alert('Tu hora de acceso ha caducado. Vamos a renovarla...');
+							shared.location.reload();
+						}
+						else {
+							return response.json();
+						}
+					}).then(results => displaySearchResults(results)).catch(error => alert(error));
 
 				}
 			
