@@ -162,8 +162,8 @@ let APP = (WINDOW => {
 	function workWithDOM() {
 		
 		displaySearchResults.shared.songResultsList = document.getElementById('songs-results');
-		displaySearchResults.shared.artistResultsList = document.getElementById('artist-results');
-		displaySearchResults.shared.albumResultsList = document.getElementById('album-results');
+		displaySearchResults.shared.artistResultsList = document.getElementById('artists-results');
+		displaySearchResults.shared.albumResultsList = document.getElementById('albums-results');
 		documentClick.shared.fetch = window.fetch;
 		
 		document.addEventListener('click', documentClick);
