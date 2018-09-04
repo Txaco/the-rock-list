@@ -66,7 +66,7 @@ let APP = (WINDOW => {
 	};
 
 	// Append results to DOM
-	function displaySearchResults(results) {console.log(results);
+	function displaySearchResults(results) {
 
 		let data = displaySearchResults.data, shared = displaySearchResults.shared;
 		
