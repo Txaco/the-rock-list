@@ -26,7 +26,7 @@ let APP = (WINDOW => {
 	DATA.implicitGrantUri =
 		`https://accounts.spotify.com/authorize?response_type=token&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
 	`;
-	DATA.searchUri = `https://api.spotify.com/v1/search?type=track&limit=${DATA.resultLimit}&q=track:`;
+	DATA.searchUri = `https://api.spotify.com/v1/search?limit=${DATA.resultLimit}`;
 	DATA.searchOptions = {
 		credentials: 'same-origin',
 		headers: {}
@@ -80,22 +80,20 @@ let APP = (WINDOW => {
 
 				imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
 
-				htmlItems += `<li class="result">
+				htmlItems += `
 
-												<div class="result-image">
-													<img src="${imageSrc}" alt="Track Image" />
-												</div>
+					<li class="result-item">
 
-												<div class="result-info">
-													<p class="result-info-artist">${item.artists[0].name}</p>
-													<p class="result-info-title">${item.name}</p>
-													<p class="result-info-album">
-														<span class="result-info-album-legend">From the ${item.album.album_type}&nbsp;</span>
-														<span class="result-info-album-title">${item.album.name}</span>
-													</p>
-											</div>
-					
-										</li>`;
+						<img src="${imageSrc}" alt="Track Image" />
+						<div>
+							<h5 class="result-artist result-info">${item.artists[0].name}</h5>
+							<h4 class="result-title result-info">${item.name}</h4>
+							<h6 class="result-album result-info">Del ${item.album.album_type}&nbsp;<span>${item.album.name}</span></h6>
+						</div>
+
+					</li>
+
+				`;
 
 			}
 		
@@ -103,11 +101,11 @@ let APP = (WINDOW => {
 		
 		else {
 		
-			htmlItems += `<li class="no-results">Sorry, no results!</li>`;
+			htmlItems += `<li class="no-results"></li>`;
 		
 		}
 
-		shared.searchResultsList.innerHTML = htmlItems;
+		shared.songResultsList.innerHTML = htmlItems;
 
 	}
 	displaySearchResults.data = {
@@ -125,17 +123,25 @@ let APP = (WINDOW => {
 			if(userInput) {
 			
 				let data = documentClick.data, shared = documentClick.shared, search = shared.fetch;
-				
-				let searchUri = data.searchUri + shared.encode(userInput);
+
+				let input = shared.encode(userInput);
 				
 				if(!data.searchOptions.headers['Authorization']) {
 					data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
 				}
-				
-				search(searchUri, data.searchOptions)
-					.then(response => response.json())
-						.then(results => displaySearchResults(results))
-							.catch(error => console.log(error)); /*shared.location.reload()*/
+
+				let URI;
+
+				for(let type of ['track', 'artist', 'album']) {
+
+					URI = `${data.searchUri}&type=${type}&q=${type}:${input}`;
+
+					search(URI, data.searchOptions)
+						.then(response => response.json())
+							.then(results => displaySearchResults(results))
+								.catch(error => console.log(error)); /*shared.location.reload()*/
+
+				}
 			
 			}
 			
@@ -155,21 +161,21 @@ let APP = (WINDOW => {
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
 		
-		let data = workWithDOM.data;
-		
-		displaySearchResults.shared.searchResultsList = document.getElementById('search-results');
+		displaySearchResults.shared.songResultsList = document.getElementById('songs-results');
+		displaySearchResults.shared.artistResultsList = document.getElementById('artist-results');
+		displaySearchResults.shared.albumResultsList = document.getElementById('album-results');
 		documentClick.shared.fetch = window.fetch;
 		
 		document.addEventListener('click', documentClick);
 		
-		document.body.style.display = 'block'; // Show APP !!!
+		document.body.style.display = 'grid'; // Show APP !!!
 		
 	}
   
 	// Implicit grant flow
-	function implicitGrant() {
+	function init() {
 		
-		const data = implicitGrant.data, shared = implicitGrant.shared, helpers = implicitGrant.helpers;
+		const data = init.data, shared = init.shared, helpers = init.helpers;
 		
 		let urlParams = helpers.getURLParams();
 		
@@ -187,17 +193,17 @@ let APP = (WINDOW => {
 			
 		}
 	}
-	implicitGrant.data = {
+	init.data = {
 		uri: DATA.implicitGrantUri
 	};
-	implicitGrant.shared = {
+	init.shared = {
 		location: SHARED.location
 	};
-	implicitGrant.helpers = {
+	init.helpers = {
 		getURLParams: HELPERS.getURLParams
 	};
 
-	document.addEventListener('DOMContentLoaded', implicitGrant); // Add DOM load event
+	document.addEventListener('DOMContentLoaded', init); // Add DOM load event
 
 })(window);
 
