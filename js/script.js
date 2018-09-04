@@ -161,9 +161,9 @@ let APP = (WINDOW => {
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
 		
-		displaySearchResults.shared.songResultsList = document.getElementById('songs-results');
-		displaySearchResults.shared.artistResultsList = document.getElementById('artists-results');
-		displaySearchResults.shared.albumResultsList = document.getElementById('albums-results');
+		displaySearchResults.shared.songResultsList = document.getElementById('songs-list');
+		displaySearchResults.shared.artistResultsList = document.getElementById('artists-list');
+		displaySearchResults.shared.albumResultsList = document.getElementById('albums-list');
 		documentClick.shared.fetch = window.fetch;
 		
 		document.addEventListener('click', documentClick);
