@@ -153,11 +153,7 @@ body {
 				background: #fff;
 			}
 			li.no-results {
-				height: calc(25% - 1.25rem);
-				margin: 1rem 0;
-				box-sizing: border-box;
-				display: flex;
-				flex-flow: row nowrap;
+				margin: 2rem auto;
 				background: #fff;
 				font-size: 2rem;
 				font-weight: 900;
