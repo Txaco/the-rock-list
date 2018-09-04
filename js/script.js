@@ -72,40 +72,44 @@ let APP = (WINDOW => {
 		
 		let htmlItems = '';
 		
-		if(results.tracks.items.length) {
+		if(results.tracks) {
 		
-			let imageSrc;
-			
-			for(let item of results.tracks.items) {
+			if(results.tracks.items.length) {
 
-				imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+				let imageSrc;
 
-				htmlItems += `
+				for(let item of results.tracks.items) {
 
-					<li class="result-item">
+					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
 
-						<img src="${imageSrc}" alt="Track Image" />
-						<div>
-							<h5 class="result-artist result-info">${item.artists[0].name}</h5>
-							<h4 class="result-title result-info">${item.name}</h4>
-							<h6 class="result-album result-info">Del ${item.album.album_type}&nbsp;<span>${item.album.name}</span></h6>
-						</div>
+					htmlItems += `
 
-					</li>
+						<li class="result-item">
 
-				`;
+							<img src="${imageSrc}" alt="Track Image" />
+							<div>
+								<h5 class="result-artist result-info">${item.artists[0].name}</h5>
+								<h4 class="result-title result-info">${item.name}</h4>
+								<h6 class="result-album result-info">Del ${item.album.album_type}&nbsp;<span>${item.album.name}</span></h6>
+							</div>
+
+						</li>
+
+					`;
+
+				}
 
 			}
-		
-		}
-		
-		else {
-		
-			htmlItems += `<li class="no-results"></li>`;
-		
-		}
 
-		shared.songResultsList.innerHTML = htmlItems;
+			else {
+
+				htmlItems += `<li class="no-results">Lo siento, no tenemos ese tema.</li>`;
+
+			}
+
+			shared.songResultsList.innerHTML = htmlItems;
+			
+		}
 
 	}
 	displaySearchResults.data = {
