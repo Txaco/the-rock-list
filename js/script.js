@@ -160,7 +160,7 @@ let APP = (WINDOW => {
 				for(let item of results.albums.items) {
 
 					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
-					artists = item.artists.map(artist => artist.name).join('|');
+					artists = item.artists.map(artist => artist.name).join(' | ');
 					type = item.type.charAt(0).toUpperCase() + item.type.substr(1).toLowerCase();
 
 					htmlItems += `
@@ -184,11 +184,11 @@ let APP = (WINDOW => {
 
 			else {
 
-				htmlItems += `<li class="no-results">Lo siento, no tenemos ese artista.</li>`;
+				htmlItems += `<li class="no-results">Lo siento, no tenemos ese álbum.</li>`;
 
 			}
 
-			shared.artistResultsList.innerHTML = htmlItems;
+			shared.albumResultsList.innerHTML = htmlItems;
 			
 		}
 
