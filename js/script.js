@@ -6,7 +6,7 @@ let APP = (WINDOW => {
 		clientSecret: '283b2eb32d6c4112bd82c698f5588449',
 		redirectUri: 'https://the-rock-list.netlify.com',
 		authorizationTokensUri: 'https://accounts.spotify.com/api/token',
-		fallbackImageUri: 'https://dummyimage.com/64x64/cccccc/000000&text=♪',
+		fallbackImageUri: 'https://dummyimage.com/128x128/cccccc/000000&text=♪',
 		resultLimit: 12,
 		queryFilters: [' track:', ' artist:', ' album:', ' genre:', ' year:']
 	};
