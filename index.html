@@ -1,60 +1,70 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 	<head>
 
-		<title></title>
+		<title>THE ROCK LIST</title>
 		<meta charset="utf-8" />
-		<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
 		<link href="css/style.css" rel="stylesheet" />
 		<script src="js/script.js"></script>
 
 	</head>
 
+	<!-- HTML -->
 	<body>
+
+		<!----------------->
+		<!-- USER COLUMN -->
+		<!----------------->
+
+		<!-- App Logo -->
+		<header id="app-logo">
+			<h1>THE ROCK LIST</h1>
+			<h2>
+				<span>Session</span>
+				<span>Manager</span>
+			</h2>
+		</header>
+
+		<!-- User Header -->
+		<h3 id="user-header">REPERTORIO</h3>
+
+		<!-- User List -->
+		<ul id="user-list"></ul>
+
+		<!------------------->
+		<!-- SEARCH COLUMN -->
+		<!------------------->
+
+		<!-- Search Form -->
+		<form id="search-form">
+			<input id="search-input" name="search-input" type="text" placeholder="Busca, busca..." />
+			<button id="search-button" name="search-button" type="button">
+				<svg viewBox="0 0 16 16">
+					<circle cx="6.5" cy="6.5" r="4" stroke="#000" stroke-width="1" fill="none" />
+					<line x1="9.75" y1="9.75" x2="13" y2="13" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+			</button>
+		</form>
 		
-		<!-- Wrapper Div -->
-		<div id="wrapper-div">
-			
-			<!-- Main Header -->
-			<header id="main-header">
-				<h1 id="main-header-title">THE ROCK LIST</h1>
-				<p id="main-header-legend">RESEVA ROCK Session</p>
-			</header>
-			
-			<!-- Main Content -->
-			<main id="main-content">
-				
-				<!-- Search Section -->
-				<section id="search-section">
-					
-					<!-- Search Nav -->
-					<nav id="search-nav">
-						<input id="search-input" name="search-input" type="text" placeholder="Track, artist, album, playlist..." />
-						<button id="search-button" type="button">GO!</button>
-					</nav>
-					
-					<!-- Search Results -->
-					<ul id="search-results"></ul>
-					
-				</section>
-					
-				<!-- User Section -->
-				<section id="user-section">
-					
-					<!-- User Header -->
-					<header id="user-header">
-						<h2 id="user-header-title">SET-LIST</h2>
-					</header>
-					
-					<!-- User Items List -->
-					<ul id="user-items"></ul>
+		<!-- Results Buttons -->
+		<input checked type="radio" id="search-songs" name="search-type" />
+		<input type="radio" id="search-artists" name="search-type" />
+		<input type="radio" id="search-albums" name="search-type" />
 
-				</section>
+		<!-- Search Nav -->
+		<nav id="search-nav">
+			<label for="search-songs">TEMAS</label>
+			<label for="search-artists">ARTISTAS</label>
+			<label for="search-albums">DISCOS</label>
+		</nav>
 
-			</section>
-
-		</div>
+		<!-- Results Lists -->
+		<ul id="songs-list" class="results-list"></ul>
+		<ul id="artists-list" class="results-list"></ul>
+		<ul id="albums-list" class="results-list"></ul>
 
 	</body>
 
