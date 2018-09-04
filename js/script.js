@@ -138,7 +138,7 @@ let APP = (WINDOW => {
 
 				for(let type of ['track', 'artist', 'album']) {
 
-					URI = `${data.searchUri}&type=${type}&q=name:${input}`;
+					URI = `${data.searchUri}&type=${type}&q=${type}:${input}`;
 
 					search(URI, data.searchOptions)
 						.then(response => response.json())
