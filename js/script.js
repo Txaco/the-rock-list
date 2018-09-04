@@ -110,6 +110,86 @@ let APP = (WINDOW => {
 			shared.songResultsList.innerHTML = htmlItems;
 			
 		}
+		
+		else if(results.artists) {
+		
+			if(results.artists.items.length) {
+
+				let imageSrc, genres;
+
+				for(let item of results.artists.items) {
+
+					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+					genres = item.genres.map(genre => genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase()).join(' ')).join(', ');
+
+					htmlItems += `
+
+						<li class="result-item">
+
+							<img src="${imageSrc}" alt="Track Image" />
+							<div>
+								<h5 class="result-artist result-info">Popularidad:&nbsp;${item.popularity}</h5>
+								<h4 class="result-title result-info">${item.name}</h4>
+								<h6 class="result-album result-info">Estilo:&nbsp;<span>${genres}</span></h6>
+							</div>
+
+						</li>
+
+					`;
+
+				}
+
+			}
+
+			else {
+
+				htmlItems += `<li class="no-results">Lo siento, no tenemos ese artista.</li>`;
+
+			}
+
+			shared.artistResultsList.innerHTML = htmlItems;
+			
+		}
+		
+		else if(results.albums) {
+		
+			if(results.albums.items.length) {
+
+				let imageSrc, artists;
+
+				for(let item of results.albums.items) {
+
+					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+					artists = item.artists.map(artist => artist.name),join( | );
+
+					htmlItems += `
+
+						<li class="result-item">
+
+							<img src="${imageSrc}" alt="Track Image" />
+							<div>
+								<h5 class="result-artist result-info">${artists}</h5>
+								<h4 class="result-title result-info">${item.name}</h4>
+								<h6 class="result-album result-info">Del ${item.album.album_type}&nbsp;<span>${item.album.name}</span></h6>
+							</div>
+
+						</li>
+
+					`;
+
+				}
+
+			}
+
+			else {
+
+				htmlItems += `<li class="no-results">Lo siento, no tenemos ese artista.</li>`;
+
+			}
+
+			shared.artistResultsList.innerHTML = htmlItems;
+			
+		}
 
 	}
 	displaySearchResults.data = {
