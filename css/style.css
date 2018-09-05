@@ -18,16 +18,63 @@ body {
 }
 
 html {
-	--app-logo-B: #575c55;
-	--app-logo-h1-C: #acc12f;
-	--app-logo-h2-C: #96a13a;
-	--user-header-B: #45425a;
-	--user-header-C: #acc12f;
-	--song: #ccc;
-	--artist: #ccc;
-	--album: #ccc;
-	--black: #000;
-	--white: #fff;
+	--app-logo-B: #;
+	--app-logo-h1-C: #;
+	--app-logo-h2-C: #;
+	--user-header-B: #;
+	--user-header-C: #;
+	--user-list-B: #;
+	--user-list-C: #;
+	--search-form-B: #;
+	--search-form-C: #;
+	--form-input-B: #;
+	--form-input-C: #;
+	--input-placeholder-B: #;
+	--input-placeholder-C: #;
+	--form-button-B: #;
+	--form-button-C: #;
+	--button-icon-B: #;
+	--button-icon-C: #;
+	--search-nav-B: #;
+	--search-nav-C: #;
+	--nav-label-B: #;
+	--nav-label-C: #;
+	--songs-label-B: #;
+	--songs-label-C: #;
+	--artists-label-B: #;
+	--artists-label-C: #;
+	--albums-label-B: #;
+	--albums-label-C: #;
+	--results-list-B: #;
+	--results-list-C: #;
+	--songs-list-B: #;
+	--songs-list-C: #;
+	--artists-list-B: #;
+	--artists-list-C: #;
+	--albums-list-B: #;
+	--albums-list-C: #;
+	--result-item-B: #;
+	--result-item-C: #;
+	--no-results-B: #;
+	--no-results-C: #;
+	--item-image-B: #;
+	--item-image-C: #;
+	--item-info-B: #;
+	--item-info-C: #;
+	--info-text-B: #;
+	--info-text-C: #;
+	--info-top-B: #;
+	--info-top-C: #;
+	--info-mid-B: #;
+	--info-mid-C: #;
+	--info-bot-B: #;
+	--info-bot-C: #;
+	--info-bot-span-B: #;
+	--info-bot-span-C: #;
+	--checked-label-B: #;
+	--checked-label-C: #;
+	--checked-list-B: #;
+	--checked-list-C: #;
 }
 
 html {
@@ -93,6 +140,8 @@ body {
 				z-index: 1;
 				font-size: 2rem;
 				font-weight: 900;
+				background: var(--user-list-B);
+				color: var(--user-list-C);
 			}
 			ul#user-list > li {
 				line-height: 1.5;
@@ -107,6 +156,8 @@ body {
 		grid-area: search-form;
 		border-bottom: solid 1px #000;
 		box-sizing: border-box;
+		background: var(--search-form-B);
+		color: var(--search-form-C);
 	}
 	form#search-form > input {
 		display: block;
@@ -117,20 +168,28 @@ body {
 		font-weight: 900;
 		padding: 1rem;
 		box-sizing: border-box;
-		background: rgba(255, 255, 255, 1);
-		color: rgba(0, 0, 0, 1);
+		background: var(--form-input-B);
+		color: var(--form-input-C);
 	}
-	input[type="text"]::placeholder { text-align: center; }
+	input[type="text"]::placeholder {
+		text-align: center;
+		background: var(--input-placeholder-B);
+		color: var(--input-placeholder-C);
+}
 	form#search-form > button {
 		width: 20%;
 		height: 100%;
 		border-left: solid 1px #000;
 		box-sizing: border-box;
+		background: var(--form-button-B);
+		color: var(--form-button-C);
 	}
 	form#search-form > button > svg {
 		display: block;
 		height: 100%;
 		margin: 0 auto;
+		background: var(--button-icon-B);
+		color: var(--button-icon-C);
 	}
 
 		/* Search Nav */
@@ -140,6 +199,8 @@ body {
 			align-items: flex-end;
 			font-size: 1.7rem;
 			font-weight: 700;
+			background: var(--search-nav-B);
+			color: var(--search-nav-C);
 		}
 		nav#search-nav > label {
 			flex: 1;
@@ -150,11 +211,12 @@ body {
 			border: solid 1px var(--black);
 			box-sizing: border-box;
 			cursor:pointer;
-			color: var(--black);
+			background: var(--nav-label-B);
+			color: var(--nav-label-C);
 		}
-		nav#search-nav > label[for="search-songs"] { background: var(--song); }
-		nav#search-nav > label[for="search-artists"] { background: var(--artist); }
-		nav#search-nav > label[for="search-albums"] { background: var(--album); }
+		nav#search-nav > label[for="search-songs"] { background: var(--songs-label-B); color: var(--songs-label-C); }
+		nav#search-nav > label[for="search-artists"] { background: var(--artists-label-B); color: var(--artists-label-C); }
+		nav#search-nav > label[for="search-albums"] { background: var(--albums-label-B); color: var(--albums-label-C); }
 
 			/* Results Lists */
 			ul.results-list {
@@ -164,10 +226,12 @@ body {
 				box-sizing: border-box;
 				overflow: auto;
 				z-index: 1;
+				background: var(--results-list-B);
+				color: var(--results-list-C); 
 			}
-			ul#songs-list { background: var(--white); }
-			ul#artists-list { background: var(--white); }
-			ul#albums-list { background: var(--white); }
+			ul#songs-list { background: var(--songs-list-B); color: var(--songs-list-C); }
+			ul#artists-list { background: var(--artists-list-B); color: var(--artists-list-C); }
+			ul#albums-list { background: var(--albums-list-B); color: var(--albums-list-C); }
 			li.result-item {
 				height: calc(25% - 1.25rem);
 				margin: 1rem 0;
@@ -175,7 +239,8 @@ body {
 				box-sizing: border-box;
 				display: flex;
 				flex-flow: row nowrap;
-				background: #fff;
+				background: var(--result-item-B);
+				color: var(--result-item-C);
 			}
 			li.no-results {
 				margin-top: 2rem;
@@ -183,10 +248,14 @@ body {
 				text-align: center;
 				font-size: 2rem;
 				font-weight: 900;
+				background: var(--no-results-B);
+				color: var(--no-results-C);
 			} 
 			li.result-item > img {
 				display: block;
 				height: 100%;
+				background: var(--item-image-B);
+				color: var(--item-image-C);
 			}
 			li.result-item > div {
 				display: flex;
@@ -196,27 +265,39 @@ body {
 				box-sizing: border-box;
 				white-space: nowrap;
 				overflow: hidden;
+				background: var(--item-info-B);
+				color: var(--item-info-C);
 			}
 			.result-info {
 				overflow: hidden;
 				text-overflow: ellipsis;
+				background: var(--info-text-B);
+				color: var(--info-text-C);
 			}
 			h5.result-artist {
 				text-transform: uppercase;
 				font-size: 1.5rem;
 				font-weight: 500;
+				background: var(--info-top-B);
+				color: var(--info-top-C);
 			}
 			h4.result-title {
 				font-size: 2rem;
 				font-weight: 900;
+				background: var(--info-mid-B);
+				color: var(--info-mid-C);
 			}
 			h6.result-album {
 				font-size: 1rem;
 				font-weight: 300;
+				background: var(--info-bot-B);
+				color: var(--info-bot-C);
 			}
 			h6.result-album > span {
 				text-transform: uppercase;
 				font-weight: 700;
+				background: var(--info-bot-span-B);
+				color: var(--info-bot-span-C);
 			}
 
 	/* Results List Behaviour */
@@ -225,12 +306,15 @@ body {
 	input#search-songs:checked ~ nav > label[for="search-songs"],
 	input#search-artists:checked ~ nav > label[for="search-artists"],
 	input#search-albums:checked ~ nav > label[for="search-albums"] {
-		 border-bottom: none;
-		 background: var(--white);
+		border-bottom: none;
+		background: var(--checked-label-B);
+		color: var(--checked-label-C);
 	}
 
 	input#search-songs:checked ~ ul#songs-list,
 	input#search-artists:checked ~ ul#artists-list,
 	input#search-albums:checked ~ ul#albums-list {
 		z-index: 2;
+		background: var(--checked-list-B);
+		color: var(--checked-list-C);
 	}
