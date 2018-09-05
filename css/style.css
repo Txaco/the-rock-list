@@ -113,19 +113,21 @@ body {
 	}
 	input[type="text"]::placeholder {
 		text-align: center;
+		opacity: 1;
 		background: var(--k);
 		color: var(--w);
 }
 	form#search-form > button {
 		width: 20%;
 		height: 100%;
-		background: var(--w);
+		cursor: pointer;
+		background: var(--k);
 	}
 	form#search-form > button > svg {
 		display: block;
 		height: 100%;
 		margin: 0 auto;
-		stroke: var(--k);
+		stroke: var(--w);
 	}
 
 		/* Search Nav */
