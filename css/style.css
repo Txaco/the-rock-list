@@ -18,6 +18,8 @@ body {
 }
 
 html {
+	--body-B: #;
+	--body-C: #;
 	--app-logo-B: #;
 	--app-logo-h1-C: #;
 	--app-logo-h2-C: #;
@@ -100,6 +102,8 @@ html, body {
 body {
 	display: none;
 	grid: 'app-logo search-form' 10% 'user-header search-nav' 10% 'user-list results-list' 80% / 50% 50%;
+	background: var(--body-B);
+	color: var(--body-C);
 }
 
 	/* App Logo */
