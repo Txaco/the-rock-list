@@ -150,9 +150,6 @@ body {
 			align-items: center;
 			cursor:pointer;
 		}
-		nav#search-nav > label[for="search-songs"] { background: var(--m); color: var(--w); }
-		nav#search-nav > label[for="search-artists"] { background: var(--c); color: var(--w); }
-		nav#search-nav > label[for="search-albums"] { background: var(--y); color: var(--k); }
 
 			/* Results Lists */
 			ul.results-list {
@@ -219,9 +216,9 @@ body {
 	/* "checked" Result Label & List */
 	input[type="radio"] { display: none; }
 
-	input#search-songs:checked ~ nav > label[for="search-songs"],
-	input#search-artists:checked ~ nav > label[for="search-artists"],
-	input#search-albums:checked ~ nav > label[for="search-albums"] {
+	input#search-songs:checked ~ nav > label[for="search-songs"] { background: var(--m); }
+	input#search-artists:checked ~ nav > label[for="search-artists"] { background: var(--c); }
+	input#search-albums:checked ~ nav > label[for="search-albums"] { background: var(--y); }
 		
 	}
 
