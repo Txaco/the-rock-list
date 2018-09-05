@@ -86,7 +86,7 @@ let APP = (WINDOW => {
 					
 					if(albumType) {
 						albumText = albumType === 'compilation' ?
-							'Del recopilatorio <span>${albumName}</span>'
+							`Del recopilatorio <span>${albumName}</span>`
 							:
 							`Del ${albumType} <span>${albumName}</span>`;
 					}
@@ -127,22 +127,23 @@ let APP = (WINDOW => {
 		
 			if(results.artists.items.length) {
 
-				let imageSrc, genres;
+				let imageSrc, genres, genresText;
 
 				for(let item of results.artists.items) {
 
 					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
 					genres = item.genres.map(genre => genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase()).join(' ')).join(', ');
-
+					genresText = genres ? `Estilo: <span>${genres}</span>` : 'No tiene estilo';
+					
 					htmlItems += `
 
 						<li class="result-item">
 
-							<img src="${imageSrc}" alt="Track Image" />
+							<img src="${imageSrc}" alt="Artist Image" />
 							<div>
 								<h5 class="result-artist result-info">Popularidad:&nbsp;${item.popularity}</h5>
 								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">Estilo:&nbsp;<span>${genres}</span></h6>
+								<h6 class="result-album result-info">${genresText}</h6>
 							</div>
 
 						</li>
@@ -179,11 +180,11 @@ let APP = (WINDOW => {
 
 						<li class="result-item">
 
-							<img src="${imageSrc}" alt="Track Image" />
+							<img src="${imageSrc}" alt="Album Image" />
 							<div>
 								<h5 class="result-artist result-info">${artists}</h5>
 								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">${type} &#8471;&copysr;<span>${item.release_date}</span></h6>
+								<h6 class="result-album result-info">${type} &copysr;<span>${item.release_date}</span></h6>
 							</div>
 
 						</li>
