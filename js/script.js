@@ -80,7 +80,7 @@ let APP = (WINDOW => {
 
 				for(let item of results.tracks.items) {
 
-					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+					imageSrc = item.images && item.images.length ? item.images[0].url : data.fallbackImageUri;
 					albumType = item.album.album_type;
 					albumName = item.album.name;
 					
@@ -131,7 +131,7 @@ let APP = (WINDOW => {
 
 				for(let item of results.artists.items) {
 
-					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+					imageSrc = item.images && item.images.length ? item.images[0].url : data.fallbackImageUri;
 					genres = item.genres.map(genre => genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase()).join(' ')).join(', ');
 					genresText = genres ? `Estilo: <span>${genres}</span>` : 'No tiene estilo';
 					
@@ -172,7 +172,7 @@ let APP = (WINDOW => {
 
 				for(let item of results.albums.items) {
 
-					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+					imageSrc = item.images && item.images.length ? item.images[0].url : data.fallbackImageUri;
 					artists = item.artists.map(artist => artist.name).join(' | ');
 					albumType = item.album_type === 'compilation' ? 'recopilatorio' : item.album_type;
 					albumType = albumType.charAt(0).toUpperCase() + albumType.substr(1).toLowerCase();
