@@ -18,11 +18,12 @@ body {
 }
 
 html {
-	--k: rgb(48, 48, 48);
-	--w: rgb(250, 250, 250);
-	--m: rgb(238, 90, 64);
-	--c: rgb(124, 182, 213);
-	--y: rgb(250, 207, 49);
+	--z: rgb(7, 7, 7);
+	--a: rgb(252, 252, 252);
+	--r: rgb(193, 20, 50);
+	--b: rgb(0, 154, 218);
+	--y: rgb(253, 209, 10);
+	--g: rgb(102, 166, 79);
 }
 
 html {
@@ -43,8 +44,8 @@ html, body {
 body {
 	display: none;
 	grid: 'app-logo search-form' 10% 'user-header search-nav' 10% 'user-list results-list' 80% / 50% 50%;
-	background: var(--k);
-	color: var(--w);
+	background: var(--z);
+	color: var(--a);
 }
 
 	/* App Logo */
@@ -108,30 +109,30 @@ body {
 		font-weight: 900;
 		padding: 1rem;
 		box-sizing: border-box;
-		background: var(--w);
-		color: var(--k);
+		background: var(--a);
+		color: var(--z);
 	}
 	input[type="text"]::placeholder {
 		text-align: center;
 		opacity: 1;
-		background: var(--k);
-		color: var(--w);
+		background: var(--z);
+		color: var(--a);
 	}
 	input[type="text"]:focus::placeholder {
-		background: var(--w);
-		color: var(--k);
+		background: var(--a);
+		color: var(--z);
 	}
 	form#search-form > button {
 		width: 20%;
 		height: 100%;
 		cursor: pointer;
-		background: var(--k);
+		background: var(--z);
 	}
 	form#search-form > button > svg {
 		display: block;
 		height: 100%;
 		margin: 0 auto;
-		stroke: var(--w);
+		stroke: var(--a);
 	}
 
 		/* Search Nav */
@@ -160,25 +161,24 @@ body {
 				overflow: auto;
 				z-index: 1;
 				box-sizing: border-box;
+				color: var(--z);
 			}
-			ul#songs-list { background: var(--m); color: var(--w); }
-			ul#artists-list { background: var(--c); color: var(--w); }
-			ul#albums-list { background: var(--y); color: var(--k); }
+			ul#songs-list { background: var(--y); }
+			ul#artists-list { background: var(--b); }
+			ul#albums-list { background: var(--g); }
 			li.result-item {
 				height: calc(25% - 1.25rem);
 				margin: 1rem 0;
 				display: flex;
 				flex-flow: row nowrap;
-				background: var(--w);
-				color: var(--k);
+				background: var(--a);
+				color: var(--z);
 			}
 			li.no-results {
 				margin-top: 2rem;
 				text-align: center;
 				font-size: 2rem;
 				font-weight: 900;
-				background: var(--w);
-				color: var(--k);
 			} 
 			li.result-item > img {
 				display: block;
@@ -217,6 +217,7 @@ body {
 
 	/* "checked" Result Label & List */
 	input[type="radio"] { display: none; }
+	input[type="radio"]:checked ~ nav > label { color: var(--z); }
 
 	input#search-songs:checked ~ nav > label[for="search-songs"] { background: var(--m); }
 	input#search-artists:checked ~ nav > label[for="search-artists"] { background: var(--c); }
