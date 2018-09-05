@@ -108,15 +108,17 @@ body {
 		font-weight: 900;
 		padding: 1rem;
 		box-sizing: border-box;
-		background: var(--w);
-		color: var(--k);
 	}
 	input[type="text"]::placeholder {
 		text-align: center;
 		opacity: 1;
 		background: var(--k);
 		color: var(--w);
-}
+	}
+	input[type="text"]::focus {
+		background: var(--w);
+		color: var(--k);
+	}
 	form#search-form > button {
 		width: 20%;
 		height: 100%;
