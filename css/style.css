@@ -218,9 +218,7 @@ body {
 
 	input#search-songs:checked ~ nav > label[for="search-songs"] { background: var(--m); }
 	input#search-artists:checked ~ nav > label[for="search-artists"] { background: var(--c); }
-	input#search-albums:checked ~ nav > label[for="search-albums"] { background: var(--y); }
-		
-	}
+	input#search-albums:checked ~ nav > label[for="search-albums"] { background: var(--y); color: var(--k) }
 
 	input#search-songs:checked ~ ul#songs-list,
 	input#search-artists:checked ~ ul#artists-list,
