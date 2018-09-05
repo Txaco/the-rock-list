@@ -20,10 +20,10 @@ body {
 html {
 	--z: rgb(7, 7, 7);
 	--a: rgb(252, 252, 252);
-	--r: rgb(193, 20, 50);
-	--b: rgb(0, 154, 218);
-	--y: rgb(253, 209, 10);
-	--g: rgb(102, 166, 79);
+	--r: rgb(193, 57, 94);
+	--b: rgb(137, 167, 194);
+	--y: rgb(240, 202, 80);
+	--g: rgb(174, 193, 123);
 }
 
 html {
@@ -117,14 +117,16 @@ body {
 	input[type="text"]::placeholder {
 		text-align: center;
 		opacity: 1;
-		background: var(--z);
+		border-bottom-left-radius: .2rem;
+		border-bottom-right-radius: .2rem;
+		background: none;
 		color: var(--a);
 	}
 	input[type="text"]:focus::placeholder {
 		border-bottom-left-radius: .2rem;
 		border-bottom-right-radius: .2rem;
-		background: var(--a);
-		color: var(--z);
+		background: none;
+		color: none;
 	}
 	form#search-form > button {
 		width: 20%;
@@ -132,6 +134,7 @@ body {
 		cursor: pointer;
 		background: var(--z);
 	}
+	form#search-form > button:active { background: var(--r); }
 	form#search-form > button > svg {
 		display: block;
 		height: 100%;
