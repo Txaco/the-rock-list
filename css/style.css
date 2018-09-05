@@ -18,6 +18,9 @@ body {
 }
 
 html {
+	--app-logo-B: #575c55;
+	--app-logo-h1-C: #acc12f;
+	--app-logo-h2-C: #96a13a;
 	--song: #ccc;
 	--artist: #ccc;
 	--album: #ccc;
@@ -51,12 +54,13 @@ body {
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
-		background: rgba(0, 0, 0, 1);
+		background: var(--app-logo-B);
 		color: rgba(255, 255, 255, 1);
 	}
 	header#app-logo > h1 {
 		font-size: 4rem;
 		font-weight: 900;
+		color: var(--app-logo-h1-C);
 	}
 	header#app-logo > h2 {
 		display: flex;
@@ -64,6 +68,7 @@ body {
 		align-items: center;
 		font-size: 1.4rem;
 		font-weight: 300;
+		color: var(--app-logo-h2-C);
 	}
 
 		/* User Header */
