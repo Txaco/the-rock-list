@@ -76,11 +76,12 @@ let APP = (WINDOW => {
 		
 			if(results.tracks.items.length) {
 
-				let imageSrc;
+				let imageSrc, albumType;
 
 				for(let item of results.tracks.items) {
 
 					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
+					albumType = item.album.album_type ? item.album.album_type === 'compilation' ? 'recopilatorio' : item.album.album_type : 'Tema sin clasificar';
 
 					htmlItems += `
 
