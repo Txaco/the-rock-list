@@ -76,12 +76,23 @@ let APP = (WINDOW => {
 		
 			if(results.tracks.items.length) {
 
-				let imageSrc, albumType;
+				let imageSrc, albumType, albumText, albumName;
 
 				for(let item of results.tracks.items) {
 
 					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
-					albumType = item.album.album_type ? item.album.album_type === 'compilation' ? 'recopilatorio' : item.album.album_type : 'Tema sin clasificar';
+					albumType = item.album.album_type;
+					albumName = item.album.name;
+					
+					if(albumType) {
+						albumText = albumType === 'compilation' ?
+							'Del recopilatorio <span>${albumName}</span>'
+							:
+							`Del ${albumType} <span>${albumName}</span>`;
+					}
+					else {
+						albumText = 'Tema sin clasificar';
+					}
 
 					htmlItems += `
 
@@ -91,7 +102,7 @@ let APP = (WINDOW => {
 							<div>
 								<h5 class="result-artist result-info">${item.artists[0].name}</h5>
 								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">Del ${item.album.album_type}&nbsp;<span>${item.album.name}</span></h6>
+								<h6 class="result-album result-info">${albumText}</h6>
 							</div>
 
 						</li>
