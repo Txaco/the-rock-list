@@ -108,6 +108,8 @@ body {
 		font-weight: 900;
 		padding: 1rem;
 		box-sizing: border-box;
+		background: var(--w);
+		color: var(--k);
 	}
 	input[type="text"]::placeholder {
 		text-align: center;
@@ -115,7 +117,7 @@ body {
 		background: var(--k);
 		color: var(--w);
 	}
-	input[type="text"]::focus {
+	input[type="text"]:focus::placeholder {
 		background: var(--w);
 		color: var(--k);
 	}
