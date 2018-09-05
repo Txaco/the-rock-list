@@ -108,6 +108,8 @@ body {
 		font-size: 3rem;
 		font-weight: 900;
 		padding: 1rem;
+		border-bottom-left-radius: .2rem;
+		border-bottom-right-radius: .2rem;
 		box-sizing: border-box;
 		background: var(--a);
 		color: var(--z);
@@ -115,6 +117,8 @@ body {
 	input[type="text"]::placeholder {
 		text-align: center;
 		opacity: 1;
+		border-bottom-left-radius: .2rem;
+		border-bottom-right-radius: .2rem;
 		background: var(--z);
 		color: var(--a);
 	}
@@ -132,7 +136,7 @@ body {
 		display: block;
 		height: 100%;
 		margin: 0 auto;
-		stroke: var(--r);
+		stroke: var(--a);
 	}
 
 		/* Search Nav */
