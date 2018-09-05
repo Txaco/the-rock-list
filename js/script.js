@@ -168,13 +168,15 @@ let APP = (WINDOW => {
 		
 			if(results.albums.items.length) {
 
-				let imageSrc, artists, type;
+				let imageSrc, artists, albumType, infoText;
 
 				for(let item of results.albums.items) {
 
 					imageSrc = item.images && item.images.length ? item.images[item.images.length - 1].url : data.fallbackImageUri;
 					artists = item.artists.map(artist => artist.name).join(' | ');
-					type = item.type.charAt(0).toUpperCase() + item.type.substr(1).toLowerCase();
+					albumType = item.album_type === 'compilation' ? 'recopilatorio' : item.album_type;
+					albumType = albumType.charAt(0).toUpperCase() + albumType.substr(1).toLowerCase();
+					infoText = `${albumType} &copysr; <span>${item.release_date}</span>`;
 
 					htmlItems += `
 
@@ -184,7 +186,7 @@ let APP = (WINDOW => {
 							<div>
 								<h5 class="result-artist result-info">${artists}</h5>
 								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">${type} &copysr; <span>${item.release_date}</span></h6>
+								<h6 class="result-album result-info">${infoText}</h6>
 							</div>
 
 						</li>
