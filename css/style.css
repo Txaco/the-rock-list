@@ -219,9 +219,9 @@ body {
 	input[type="radio"] { display: none; }
 	input[type="radio"]:checked ~ nav > label { color: var(--z); }
 
-	input#search-songs:checked ~ nav > label[for="search-songs"] { background: var(--m); }
-	input#search-artists:checked ~ nav > label[for="search-artists"] { background: var(--c); }
-	input#search-albums:checked ~ nav > label[for="search-albums"] { background: var(--y); color: var(--k) }
+	input#search-songs:checked ~ nav > label[for="search-songs"] { background: var(--y); }
+	input#search-artists:checked ~ nav > label[for="search-artists"] { background: var(--b); }
+	input#search-albums:checked ~ nav > label[for="search-albums"] { background: var(--g); }
 
 	input#search-songs:checked ~ ul#songs-list,
 	input#search-artists:checked ~ ul#artists-list,
