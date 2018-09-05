@@ -131,7 +131,9 @@ body {
 		/* User Header */
 		h3#user-header {
 			grid-area: user-header;
-			margin: auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			font-size: 3rem;
 			font-weight: 100;
 			background: var(--user-header-B);
