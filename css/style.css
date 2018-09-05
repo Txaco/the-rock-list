@@ -4,6 +4,20 @@ input, button { border: none; font: inherit; }
 ul { list-style: none; }
 
 html {
+	-webkit-tap-highlight-color:transparent;
+}
+
+body {
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	text-rendering:optimizeLegibility;
+}
+
+html {
 	--song: #ccc;
 	--artist: #ccc;
 	--album: #ccc;
@@ -125,6 +139,7 @@ body {
 			align-items: center;
 			border: solid 1px var(--black);
 			box-sizing: border-box;
+			cursor:pointer;
 			color: var(--black);
 		}
 		nav#search-nav > label[for="search-songs"] { background: var(--song); }
