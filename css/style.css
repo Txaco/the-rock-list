@@ -21,6 +21,8 @@ html {
 	--app-logo-B: #575c55;
 	--app-logo-h1-C: #acc12f;
 	--app-logo-h2-C: #96a13a;
+	--user-header-B: #45425a;
+	--user-header-C: #acc12f;
 	--song: #ccc;
 	--artist: #ccc;
 	--album: #ccc;
@@ -77,6 +79,8 @@ body {
 			margin: auto;
 			font-size: 3rem;
 			font-weight: 100;
+			background: var(--user-header-B);
+			color: var(--user-header-C);
 		}
 
 			/* User List */
