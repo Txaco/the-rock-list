@@ -117,12 +117,12 @@ body {
 	input[type="text"]::placeholder {
 		text-align: center;
 		opacity: 1;
-		border-bottom-left-radius: .2rem;
-		border-bottom-right-radius: .2rem;
 		background: var(--z);
 		color: var(--a);
 	}
 	input[type="text"]:focus::placeholder {
+		border-bottom-left-radius: .2rem;
+		border-bottom-right-radius: .2rem;
 		background: var(--a);
 		color: var(--z);
 	}
