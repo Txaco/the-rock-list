@@ -119,7 +119,7 @@ body {
 		opacity: 1;
 		border-bottom-left-radius: .2rem;
 		border-bottom-right-radius: .2rem;
-		background: none;
+		background: var(--z);
 		color: var(--a);
 	}
 	input[type="text"]:focus::placeholder {
