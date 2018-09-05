@@ -19,12 +19,26 @@ body {
 
 html {
 	--k: rgba(22, 25, 37, 1);
+	--k1: rgba(22, 25, 37, .1);
+	--k2: rgba(22, 25, 37, .2);
+	--k3: rgba(22, 25, 37, .3);
+	--k4: rgba(22, 25, 37, .4);
+	--k5: rgba(22, 25, 37, .5);
+	--k6: rgba(22, 25, 37, .6);
 	--k7: rgba(22, 25, 37, .7);
+	--k8: rgba(22, 25, 37, .8);
+	--k9: rgba(22, 25, 37, .9);
 	--w: rgba(253, 255, 252, 1);
-	--w9: rgba(253, 255, 252, .9);
-	--w7: rgba(253, 255, 252, .7);
+	--w1: rgba(253, 255, 252, .1);
+	--w2: rgba(253, 255, 252, .2);
+	--w3: rgba(253, 255, 252, .3);
+	--w4: rgba(253, 255, 252, .4);
 	--w5: rgba(253, 255, 252, .5);
-	--m: rgba(193, 41, 46, 1);
+	--w6: rgba(253, 255, 252, .6);
+	--w7: rgba(253, 255, 252, .7);
+	--w8: rgba(253, 255, 252, .8);
+	--w9: rgba(253, 255, 252, .9);
+	--m rgba(193, 41, 46, 1);
 	--c: rgba(35, 87, 137, 1);
 	--y: rgba(241, 211, 2, 1);
 }
@@ -135,8 +149,7 @@ body {
 		display: block;
 		height: 100%;
 		margin: 0 auto;
-		background: var(--k);
-		color: var(--w);
+		stroke: var(--k8);
 	}
 
 		/* Search Nav */
@@ -153,9 +166,9 @@ body {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			border: solid 1px var(--w5);
-			box-sizing: border-box;
 			cursor:pointer;
+			box-sizing: border-box;
+			border: solid 1px var(--w5);
 		}
 		nav#search-nav > label[for="search-songs"] { background: var(--m); color: var(--w7); }
 		nav#search-nav > label[for="search-artists"] { background: var(--c); color: var(--w7); }
@@ -181,14 +194,17 @@ body {
 				box-sizing: border-box;
 				background: var(--w);
 				color: var(--k);
-				border: solid 1px var(--k7);
+				border: solid 1px var(--k5);
 			}
 			li.no-results {
 				margin-top: 2rem;
-				background: #fff;
 				text-align: center;
 				font-size: 2rem;
 				font-weight: 900;
+				box-sizing: border-box;
+				background: var(--w);
+				color: var(--k);
+				border: solid 1px var(--k5);
 			} 
 			li.result-item > img {
 				display: block;
