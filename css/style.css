@@ -134,8 +134,8 @@ body {
 	}
 	input[type="text"]::placeholder {
 		text-align: center;
-		background: var(--k);
-		color: var(--w7);
+		background: var(--w9);
+		color: var(--k8);
 }
 	form#search-form > button {
 		width: 20%;
