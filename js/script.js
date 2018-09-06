@@ -270,9 +270,13 @@ let APP = (WINDOW => {
 	// Handler for "mousedown" Event
 	function documentMouseDown(mdEvent) {
 		
-		mdEvent.prevenDefault;
+		let target = mdEvent.target;
 		
-		if(mdEvent.target.className === 'result-item' && mdEvent.target.parentElement.id === 'songs-list') {
+		while(target.className !== 'result-item' && target.parentElement) {
+			target = target.parentElement;
+		}
+		
+		if(target.parentElement.id === 'songs-list') {
 
 			let data = documentMouseDown.data;
 
@@ -288,18 +292,26 @@ let APP = (WINDOW => {
 	// Handler for "mouseup" Event
 	function documentMouseUp(muEvent) {
 		
-		muEvent.prevenDefault;
+		if(documentMouseDown.data.songTitle) {
+		
+			let target = muEvent.target;
+			
+			while(target.id !== 'user-list' && target.parentElement) {
+				target = target.parentElement;
+			}
+			
+			if(target.id === 'user-list') {
 
-		if(muEvent.target.id === 'user-list' && documentMouseDown.data.songTitle) {
+				let shared = documentMouseUp.shared;
 
-			let shared = documentMouseUp.shared;
+				let userItem = shared.doc.createElement('li');
+				userItem.textContent = documentMouseDown.data.songTitle;
+				target.appendChild(userItem);
 
-			let userItem = shared.doc.createElement('li');
-			userItem.textContent = documentMouseDown.data.songTitle;
-			muEvent.target.appendChild(userItem);
+				documentMouseDown.data.songTitle = null;
 
-			documentMouseDown.data.songTitle = null;
-
+			}
+		
 		}
 
 	}
