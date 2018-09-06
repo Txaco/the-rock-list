@@ -213,51 +213,49 @@ let APP = (WINDOW => {
 	};
 	displaySearchResults.shared = {};
 
-	// Click handler for user search
-	function documentClick(clickEvent) {
+	// Handler for "submit" Event
+	function searchSubmit(submitEvent) {
 		
-		if(clickEvent.target.id === 'search-button') {
-			
-			let userInput = clickEvent.target.previousElementSibling.value;
-			
-			if(userInput) {
-			
-				let data = documentClick.data, shared = documentClick.shared, search = shared.fetch;
+		submitEvent.preventDefault();
+		
+		let userInput = submitEvent.target.elements['search-input'].value;
 
-				let input = shared.encode(userInput);
-				
-				if(!data.searchOptions.headers['Authorization']) {
-					data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
-				}
+		if(userInput) {
 
-				let URI;
+			let data = searchSubmit.data, shared = searchSubmit.shared, search = shared.fetch;
 
-				for(let type of ['track', 'artist', 'album']) {
+			let input = shared.encode(userInput);
 
-					URI = `${data.searchUri}&type=${type}&q=${type}:${input}`;
-
-					search(URI, data.searchOptions).then(response => {
-						if(response.status === 401) {
-							alert('Tu hora de acceso ha caducado. Vamos a renovarla...');
-							shared.location.reload();
-						}
-						else {
-							return response.json();
-						}
-					}).then(results => displaySearchResults(results)).catch(error => alert(error));
-
-				}
-			
+			if(!data.searchOptions.headers['Authorization']) {
+				data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
 			}
-			
+
+			let URI;
+
+			for(let type of ['track', 'artist', 'album']) {
+
+				URI = `${data.searchUri}&type=${type}&q=${type}:${input}`;
+
+				search(URI, data.searchOptions).then(response => {
+					if(response.status === 401) {
+						alert('Tu hora de acceso ha caducado. Vamos a renovarla...');
+						shared.location.reload();
+					}
+					else {
+						return response.json();
+					}
+				}).then(results => displaySearchResults(results)).catch(error => alert(error));
+
+			}
+
 		}
 		
 	}
-	documentClick.data = {
+	searchSubmit.data = {
 		searchUri: DATA.searchUri,
 		searchOptions: DATA.searchOptions
 	};
-	documentClick.shared = {
+	searchSubmit.shared = {
 		encode: SHARED.encode,
 		fetch: SHARED.fetch,
 		location: SHARED.location
@@ -269,9 +267,9 @@ let APP = (WINDOW => {
 		displaySearchResults.shared.songResultsList = document.getElementById('songs-list');
 		displaySearchResults.shared.artistResultsList = document.getElementById('artists-list');
 		displaySearchResults.shared.albumResultsList = document.getElementById('albums-list');
-		documentClick.shared.fetch = window.fetch;
+		searchSubmit.shared.fetch = window.fetch;
 		
-		document.addEventListener('click', documentClick);
+		document.forms['search-form'].addEventListener('submit', searchSubmit);
 		
 		document.body.style.display = 'grid'; // Show APP !!!
 		
@@ -292,7 +290,7 @@ let APP = (WINDOW => {
 			
 			shared.location.hash = '';
 			
-			documentClick.data.accessToken = urlParams.get('access_token');
+			searchSubmit.data.accessToken = urlParams.get('access_token');
 			
 			workWithDOM();
 			
