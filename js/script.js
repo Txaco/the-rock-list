@@ -97,7 +97,7 @@ let APP = (WINDOW => {
 
 					htmlItems += `
 
-						<li class="result-item">
+						<li class="result-item" data-id="${item.id}">
 
 							<img src="${imageSrc}" alt="Track Image" />
 							<div>
@@ -278,6 +278,7 @@ let APP = (WINDOW => {
 				
 				let data = documentMouseDown.data;
 				
+				data.pickedResultId = target.dataset.id;
 				data.pickedResultTitle = target.querySelector('.result-title').textContent;
 				
 				break;
@@ -290,6 +291,7 @@ let APP = (WINDOW => {
 
 	}
 	documentMouseDown.data = {
+		pickedResultId: null,
 		pickedResultTitle: null
 	};
 
@@ -298,7 +300,7 @@ let APP = (WINDOW => {
 		
 		let data = documentMouseUp.data;
 		
-		if(data.pickedResultTitle) {
+		if(data.pickedResultId && data.pickedResultTitle) {
 		
 			let target = muEvent.target;
 			
@@ -307,9 +309,11 @@ let APP = (WINDOW => {
 				if(target.id === 'user-list') {
 				
 					let userItem = documentMouseUp.shared.doc.createElement('li');
+					userItem.setAttribute('data-id', data.pickedResultId);
 					userItem.textContent = data.pickedResultTitle;
 					target.appendChild(userItem);
 					
+					data.pickedResultId = null;
 					data.pickedResultTitle = null;
 					
 					break;
