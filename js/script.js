@@ -6,6 +6,7 @@ let APP = (WINDOW => {
 		clientSecret: '283b2eb32d6c4112bd82c698f5588449',
 		redirectUri: 'https://the-rock-list.netlify.com',
 		authorizationTokensUri: 'https://accounts.spotify.com/api/token',
+		getTrackAPIUri: 'https://api.spotify.com/v1/tracks/',
 		fallbackImageUri: 'https://dummyimage.com/128x128/cccccc/000000&text=♪',
 		resultLimit: 12,
 		queryFilters: [' track:', ' artist:', ' album:', ' genre:', ' year:']
@@ -45,25 +46,57 @@ let APP = (WINDOW => {
   
 	// HELPER FUNCTIONS
 	const HELPERS = {
+		
 		getURLParams: () => {
+			
 			let shared = HELPERS.getURLParams.shared;
+			
 			let url = new shared.URL(shared.location);
+			
 			if(url.search) {
 				return url.searchParams;
 			}
+			
 			else if(url.hash) {
 				let urlParams = new shared.URLParams(url.hash.substring(1));
 				return urlParams;
 			}
+			
 			else {
 				return null;
 			}
+			
+		},
+		
+		fetchFromAPI: (APIUri, APIOptions) => {
+		
+			let data = HELPERS.fetchFromAPI.data, shared = HELPERS.fetchFromAPI.shared, fetchAPI = shared.fetch;
+			
+			fetchAPI(APIUri, APIOptions).then(response => {
+				
+				if(response.status === 401) {
+					alert('Tu hora de acceso ha caducado. Vamos a renovarla...');
+					shared.location.reload();
+				}
+				
+				else {
+					return response.json();
+				}
+			
+			});
+		
 		}
+		
 	};
 	HELPERS.getURLParams.shared = {
 		URL: SHARED.URL,
 		location: SHARED.location,
 		URLParams: SHARED.URLSearchParams
+	};
+	HELPERS.fetchFromAPI.shared = {
+		encode: SHARED.encode,
+		fetch: SHARED.fetch,
+		location: SHARED.location
 	};
 
 	// Append results to DOM
@@ -218,31 +251,29 @@ let APP = (WINDOW => {
 	displaySearchResults.shared = {};
 
 	// Handler for "submit" Event
-	function searchSubmit(submitEvent) {
+	function searchSubmit(sEvent) {
 		
-		submitEvent.preventDefault();
+		sEvent.preventDefault();
 		
-		let userInput = submitEvent.target.elements['search-input'].value;
+		let userInput = sEvent.target.elements['search-input'].value;
 
 		if(userInput && userInput !== searchSubmit.data.lastInput) {
 
-			let data = searchSubmit.data, shared = searchSubmit.shared, search = shared.fetch;
+			let data = searchSubmit.data, helpers = searchSubmit.helpers;
 			
 			data.lastInput = userInput;
-
-			let input = shared.encode(userInput);
 
 			if(!data.searchOptions.headers['Authorization']) {
 				data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
 			}
 
-			let URI;
+			let APIUri;
 
 			for(let type of ['track', 'artist', 'album']) {
 
-				URI = `${data.searchUri}&type=${type}&q=${type}:${input}`;
+				APIUri = `${data.searchUri}&type=${type}&q=${type}:${input}`;
 
-				search(URI, data.searchOptions).then(response => {
+				search(APIUri, data.searchOptions).then(response => {
 					if(response.status === 401) {
 						alert('Tu hora de acceso ha caducado. Vamos a renovarla...');
 						shared.location.reload();
@@ -261,10 +292,8 @@ let APP = (WINDOW => {
 		searchUri: DATA.searchUri,
 		searchOptions: DATA.searchOptions
 	};
-	searchSubmit.shared = {
-		encode: SHARED.encode,
-		fetch: SHARED.fetch,
-		location: SHARED.location
+	searchSubmit.helpers = {
+		fetchFromAPI: HELPERS.fetchFromAPI
 	};
 	
 	// Handler for "mousedown" Event
@@ -331,6 +360,31 @@ let APP = (WINDOW => {
 	documentMouseUp.shared = {
 		doc: SHARED.doc
 	};
+	
+	// Handler for "click" Event
+	function documentClick(cEvent) {
+		
+		let target = cEvent.target;
+	
+		if(target.parentElement.id === 'user-list') {
+		
+			let data = documentClick.data, helpers = documentClick.helpers;
+			
+			let APIUri = `${documentClick.data.APIUri}${target.dataset.id}`;
+			
+			helpers.fetchFromAPI(APIUri).then(songObject => console.log(songObject));
+		
+		}
+	
+	}
+	documentClick.data = {
+		getTrackUri: DATA.getTrackAPIUri,
+		getTrackOptions: DATA.getTrackOptions,
+		accessToken: DATA.accessToken;
+	};
+	documentClick.helpers = {
+		fetchFromAPI: HELPERS.fetchFromAPI
+	};
 
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
@@ -367,6 +421,7 @@ let APP = (WINDOW => {
 		else if(urlParams.has('access_token') && urlParams.has('token_type') && urlParams.has('expires_in')) {
 			
 			shared.location.hash = '';
+			
 			
 			searchSubmit.data.accessToken = urlParams.get('access_token');
 			
