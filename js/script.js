@@ -306,18 +306,18 @@ let APP = (WINDOW => {
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
 		
-		let data = workWithDOM.data;
+		let shared = workWithDOM.shared;
 		
-		displaySearchResults.shared.songResultsList = data.doc.getElementById('songs-list');
-		displaySearchResults.shared.artistResultsList = data.doc.getElementById('artists-list');
-		displaySearchResults.shared.albumResultsList = data.doc.getElementById('albums-list');
+		displaySearchResults.shared.songResultsList = shared.doc.getElementById('songs-list');
+		displaySearchResults.shared.artistResultsList = shared.doc.getElementById('artists-list');
+		displaySearchResults.shared.albumResultsList = shared.doc.getElementById('albums-list');
 		searchSubmit.shared.fetch = window.fetch;
 		
-		data.doc.addEventListener('mousedown', documentMouseDown);
-		data.doc.addEventListener('mouseup', documentMouseUp);
-		data.doc.forms['search-form'].addEventListener('submit', searchSubmit);
+		shared.doc.addEventListener('mousedown', documentMouseDown);
+		shared.doc.addEventListener('mouseup', documentMouseUp);
+		shared.doc.forms['search-form'].addEventListener('submit', searchSubmit);
 		
-		data.doc.body.style.display = 'grid'; // Show APP !!!
+		shared.doc.body.style.display = 'grid'; // Show APP !!!
 		
 	}
 	workWithDOM.shared = {
