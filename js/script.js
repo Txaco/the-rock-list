@@ -120,6 +120,7 @@ let APP = (WINDOW => {
 			}
 
 			shared.songResultsList.innerHTML = htmlItems;
+			shared.songResultsList.scrollTop = 0;
 			
 		}
 		
@@ -161,6 +162,7 @@ let APP = (WINDOW => {
 			}
 
 			shared.artistResultsList.innerHTML = htmlItems;
+			shared.artistResultsList.scrollTop = 0;
 			
 		}
 		
@@ -204,6 +206,7 @@ let APP = (WINDOW => {
 			}
 
 			shared.albumResultsList.innerHTML = htmlItems;
+			shared.albumResultsList.scrollTop = 0;
 			
 		}
 
