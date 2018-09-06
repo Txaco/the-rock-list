@@ -273,15 +273,19 @@ let APP = (WINDOW => {
 		let target = mdEvent.target;
 		
 		while(target.className !== 'result-item' && target.parentElement) {
+			
+			if(target.parentElement.id === 'songs-list') {
+				
+				let data = documentMouseDown.data;
+				
+				data.songTitle = mdEvent.target.querySelector('.result-title').textContent;
+				
+				break;
+				
+			}
+			
 			target = target.parentElement;
-		}
-		
-		if(target.parentElement.id === 'songs-list') {
-
-			let data = documentMouseDown.data;
-
-			data.songTitle = mdEvent.target.querySelector('.result-title').textContent;
-
+			
 		}
 
 	}
