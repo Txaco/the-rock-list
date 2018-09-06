@@ -39,7 +39,8 @@ let APP = (WINDOW => {
 		location: WINDOW.location,
 		encode: WINDOW.encodeURIComponent,
 		decode: WINDOW.decodeURIComponent,
-		fetch: WINDOW.fetch
+		fetch: WINDOW.fetch,
+		doc: WINDOW.document
 	};
   
 	// HELPER FUNCTIONS
@@ -265,22 +266,66 @@ let APP = (WINDOW => {
 		fetch: SHARED.fetch,
 		location: SHARED.location
 	};
+	
+	// Handler for "mousedown" Event
+	function documentMouseDown(mdEvent) {
+
+		if(mdEvent.target.className === 'result-item' && mdEvent.target.parentElement.id === 'songs-list') {
+
+			let data = documentMouseDown.data;
+
+			data.songTitle = mdEvent.target.querySelector('.result-title').textContent;
+
+		}
+
+	}
+	documentMouseDown.data = {
+		songTitle: null
+	};
+
+	// Handler for "mouseup" Event
+	function documentMouseUp(muEvent) {
+
+		if(muEvent.target.id === 'user-list' && documentMouseDown.data.songTitle) {
+
+			let shared = documentMouseUp.shared;
+
+			let userItem = shared.doc.createElement('li');
+			userItem.textContent = documentMouseDown.data.songTitle;
+			muEvent.target.appendChild(userItem);
+
+			documentMouseDown.data.songTitle = null;
+
+		}
+
+	}
+	documentMouseUp.shared = {
+		doc: SHARED.doc
+	};
+
+	data.doc.addEventListener('mousedown', documentMouseDown);
+	data.doc.addEventListener('mouseup', documentMouseUp);
 
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
 		
-		displaySearchResults.shared.songResultsList = document.getElementById('songs-list');
-		displaySearchResults.shared.artistResultsList = document.getElementById('artists-list');
-		displaySearchResults.shared.albumResultsList = document.getElementById('albums-list');
+		let data = workWithDOM.data;
+		
+		displaySearchResults.shared.songResultsList = data.doc.getElementById('songs-list');
+		displaySearchResults.shared.artistResultsList = data.doc.getElementById('artists-list');
+		displaySearchResults.shared.albumResultsList = data.doc.getElementById('albums-list');
 		searchSubmit.shared.fetch = window.fetch;
 		
-		document.forms['search-form'].addEventListener('submit', searchSubmit);
+		data.doc.forms['search-form'].addEventListener('submit', searchSubmit);
 		
-		document.body.style.display = 'grid'; // Show APP !!!
+		data.doc.body.style.display = 'grid'; // Show APP !!!
 		
 	}
+	workWithDOM.shared = {
+		doc: SHARED.doc
+	};
   
-	// Implicit grant flow
+	// Initialize
 	function init() {
 		
 		const data = init.data, shared = init.shared, helpers = init.helpers;
