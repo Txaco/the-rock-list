@@ -303,9 +303,6 @@ let APP = (WINDOW => {
 		doc: SHARED.doc
 	};
 
-	data.doc.addEventListener('mousedown', documentMouseDown);
-	data.doc.addEventListener('mouseup', documentMouseUp);
-
 	// Get DOM references and set DOM events (search click) and SHOW APP !!!
 	function workWithDOM() {
 		
@@ -316,6 +313,8 @@ let APP = (WINDOW => {
 		displaySearchResults.shared.albumResultsList = data.doc.getElementById('albums-list');
 		searchSubmit.shared.fetch = window.fetch;
 		
+		data.doc.addEventListener('mousedown', documentMouseDown);
+		data.doc.addEventListener('mouseup', documentMouseUp);
 		data.doc.forms['search-form'].addEventListener('submit', searchSubmit);
 		
 		data.doc.body.style.display = 'grid'; // Show APP !!!
