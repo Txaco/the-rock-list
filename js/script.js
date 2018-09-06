@@ -272,13 +272,13 @@ let APP = (WINDOW => {
 		
 		let target = mdEvent.target;
 		
-		while(target.className !== 'result-item' && target.parentElement) {
+		while(target.parentElement) {
 			
-			if(target.parentElement.id === 'songs-list') {
+			if(target.className === 'result-item' && target.parentElement.id === 'songs-list') {
 				
 				let data = documentMouseDown.data;
 				
-				data.songTitle = mdEvent.target.querySelector('.result-title').textContent;
+				data.pickedResultTitle = target.querySelector('.result-title').textContent;
 				
 				break;
 				
@@ -290,35 +290,40 @@ let APP = (WINDOW => {
 
 	}
 	documentMouseDown.data = {
-		songTitle: null
+		pickedResultTitle: null
 	};
 
 	// Handler for "mouseup" Event
 	function documentMouseUp(muEvent) {
 		
-		if(documentMouseDown.data.songTitle) {
+		let data = documentMouseUp.data;
+		
+		if(data.pickedResultTitle) {
 		
 			let target = muEvent.target;
 			
-			while(target.id !== 'user-list' && target.parentElement) {
+			while(target.parentElement) {
+				
+				if(target.id === 'user-list') {
+				
+					let userItem = documentMouseUp.shared.doc.createElement('li');
+					userItem.textContent = data.pickedResultTitle;
+					target.appendChild(userItem);
+					
+					data.pickedResultTitle = null;
+					
+					break;
+				
+				}
+				
 				target = target.parentElement;
-			}
-			
-			if(target.id === 'user-list') {
-
-				let shared = documentMouseUp.shared;
-
-				let userItem = shared.doc.createElement('li');
-				userItem.textContent = documentMouseDown.data.songTitle;
-				target.appendChild(userItem);
-
-				documentMouseDown.data.songTitle = null;
-
+				
 			}
 		
 		}
 
 	}
+	documentMouseUp.data = documentMouseDown.data;
 	documentMouseUp.shared = {
 		doc: SHARED.doc
 	};
