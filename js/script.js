@@ -223,9 +223,11 @@ let APP = (WINDOW => {
 		
 		let userInput = submitEvent.target.elements['search-input'].value;
 
-		if(userInput) {
+		if(userInput && userInput !== searchSubmit.data.lastInput) {
 
 			let data = searchSubmit.data, shared = searchSubmit.shared, search = shared.fetch;
+			
+			data.lastInput = userInput;
 
 			let input = shared.encode(userInput);
 
