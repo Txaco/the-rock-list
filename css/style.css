@@ -81,12 +81,18 @@ body {
 			ul#user-list {
 				grid-area: user-list;
 				list-style: inside decimal-leading-zero;
+				width: calc(100% - 2rem);
+				margin: 0 1rem;
 				padding: 0 1rem;
 				box-sizing: border-box;
+				border-top-left-radius: .2rem;
+				border-top-right-radius: .2rem;
 				overflow: auto;
 				z-index: 1;
 				font-size: 2rem;
 				font-weight: 900;
+				background: var(--a);
+				color: var(--z);
 			}
 			ul#user-list > li {
 				line-height: 1.5;
