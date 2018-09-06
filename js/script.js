@@ -268,7 +268,7 @@ let APP = (WINDOW => {
 	};
 	
 	// Handler for "mousedown" Event
-	function documentMouseDown(mdEvent) {
+	function documentMouseDown(mdEvent) {console.log(mdEvent);
 
 		if(mdEvent.target.className === 'result-item' && mdEvent.target.parentElement.id === 'songs-list') {
 
@@ -284,7 +284,7 @@ let APP = (WINDOW => {
 	};
 
 	// Handler for "mouseup" Event
-	function documentMouseUp(muEvent) {
+	function documentMouseUp(muEvent) {console.log(muEvent);
 
 		if(muEvent.target.id === 'user-list' && documentMouseDown.data.songTitle) {
 
