@@ -151,7 +151,7 @@ body {
 		}
 		nav#search-nav > label {
 			flex: 1;
-			height: calc(100% - 1rem);
+			height: calc(100% - 2rem);
 			display: flex;
 			justify-content: center;
 			align-items: center;
