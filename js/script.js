@@ -338,6 +338,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 					type = type.charAt(0).toUpperCase() + type.substr(1).toLowerCase(); // Titlecase album type
 
 					info = `${type} &copysr; <span>${album.release_date}</span>`; // Get album info
+console.log(list);
 
 					// Add albums to list
 					list += `
@@ -353,8 +354,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 						</li>
 
-					`;console.log(list);
-
+					`;
 				}
 
 			}
