@@ -233,9 +233,6 @@ let THE_ROCK_LIST = ( WINDOW => {
 						albumText = albumType === 'compilation' ?	`Del recopilatorio <span>${albumName}</span>`:
 																	`Del ${albumType} <span>${albumName}</span>`;
 
-						// If track album type falsy (empty string ???)
-						else albumText = 'Tema sin clasificar';
-
 						// Add track to list - set <li> item data-id attribute to Spotify track id
 						list += `
 
