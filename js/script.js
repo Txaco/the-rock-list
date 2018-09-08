@@ -136,7 +136,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 					uri = MAIN_DATA.spotifyAPI.search.uri + `&type=${type}&q=${type}:${userInput}`;
 
-					HELPER_FUNCTIONS.fetchURI(uri, MAIN_DATA.spotifyAPI.search.options).then(results => { displayResults(results); });
+					HELPER_FUNCTIONS.fetchURI(uri, MAIN_DATA.spotifyAPI.search.options).then(results => displayResults(results));
 
 				}
 
@@ -216,7 +216,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 
 	// DISPLAY_RESULTS
-	const displayResults = results => {console.log(results);
+	const displayResults = results => {
 
 		let list; // Reusable list (add items here)
 
@@ -361,6 +361,8 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 			// If array is empty, display "NO ALBUM RESULTS" message
 			else list = '<li class="spotify-no-results">Pues no, no tenemos ese album</li>';
+			
+			console.log(list);
 
 			SHARED_OBJECTS.albumResultsList.innerHTML = list; // Show list (replace old one)
 			SHARED_OBJECTS.albumResultsList.scrollTop = 0; // Reset list scroll to top
