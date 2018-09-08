@@ -1,445 +1,442 @@
-let APP = (WINDOW => {
+let THE_ROCK_LIST = ( WINDOW => {
 
-	// DATA CONSTANTS
-	const DATA = {
-		clientId: '52993c4622e348bb8d60b1b5a3c4dfcf',
-		clientSecret: '283b2eb32d6c4112bd82c698f5588449',
-		redirectUri: 'https://the-rock-list.netlify.com',
-		authorizationTokensUri: 'https://accounts.spotify.com/api/token',
-		getTrackAPIUri: 'https://api.spotify.com/v1/tracks/',
-		fallbackImageUri: 'https://dummyimage.com/128x128/cccccc/000000&text=♪',
-		resultLimit: 12,
-		queryFilters: [' track:', ' artist:', ' album:', ' genre:', ' year:']
-	};
-	DATA.authorizationCodeUri = `
-		https://accounts.spotify.com/authorize?response_type=code&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
-	`;
-	DATA.authorizationTokensOptions = {
-		method: 'POST',
-		headers: {
-			Authorization: `Basic ${[WINDOW.atob(DATA.clientId), WINDOW.atob(DATA.clientSecret)].join(':')}`
+
+
+	// MAIN DATA
+	const MAIN_DATA = {
+
+		// Spotify API data
+		spotifyAPI: {
+
+			clientId: '52993c4622e348bb8d60b1b5a3c4dfcf',
+			clientSecret: '283b2eb32d6c4112bd82c698f5588449',
+			redirectURI: 'https://the-rock-list.netlify.com',
+			resultLimit: 12,
+
 		},
-		body: {
-			grant_type: 'authorization_code',
-			redirect_uri: DATA.redirect_uri
-		}
+
+		fallbackImageURI: 'https://dummyimage.com/128x128/cccccc/000000&text=♪'
+
 	};
-	DATA.implicitGrantUri =
-		`https://accounts.spotify.com/authorize?response_type=token&client_id=${DATA.clientId}&redirect_uri=${DATA.redirectUri}
-	`;
-	DATA.searchUri = `https://api.spotify.com/v1/search?limit=${DATA.resultLimit}`;
-	DATA.searchOptions = {
-		credentials: 'same-origin',
-		headers: {}
+	// Spotify API URIs - get Token, search, get Track, ... ???
+	MAIN_DATA.spotifyAPI.accessToken = {
+		location: `https://accounts.spotify.com/authorize?response_type=token&client_id=${MAIN_DATA.spotifyAPI.clientId}&redirect_uri=${MAIN_DATA.spotifyAPI.redirectURI}`,
+		value: null,
+		header: { 'Authorization': 'Bearer ' }
 	};
+	MAIN_DATA.spotifyAPI.search = {
+		uri: `https://api.spotify.com/v1/search?limit=${MAIN_DATA.spotifyAPI.resultLimit}`,
+		options: { credentials: 'same-origin', headers: MAIN_DATA.spotifyAPI.accessToken.header }
+	};
+	MAIN_DATA.spotifyAPI.getTrack = {
+		uri: 'https://api.spotify.com/v1/tracks/',
+		options: { headers: MAIN_DATA.spotifyAPI.accessToken.header }
+	};
+
+
   
-	// SHARED OBJECTS
-	const SHARED = {
-		URL: WINDOW.URL,
-		URLSearchParams: WINDOW.URLSearchParams,
+	// SHARED OBJECTS | workWithDOM() adds SHARED_OBJECTS.dom = DOM references object
+	const SHARED_OBJECTS = {
+
 		location: WINDOW.location,
+		url: WINDOW.URL,
+		urlSearchParams: WINDOW.URLSearchParams,
 		encode: WINDOW.encodeURIComponent,
 		decode: WINDOW.decodeURIComponent,
 		fetch: WINDOW.fetch,
-		doc: WINDOW.document
+		lastSearch: null, // EVENT_LISTENERS.searchSubmit(event) adds this value
+		pickedResult: {} // EVENT_LISTENERS.pickResult(event) adds pickedResult.id and pickedResult.title
+
 	};
+
+
+
   
 	// HELPER FUNCTIONS
 	const HELPERS = {
+
+		getURLParams: {
+
+			url: SHARED_OBJECTS.url,
+			location: SHARED_OBJECTS.location,
+			urlSearchParams: SHARED_OBJECTS.urlSearchParams,
+
+			go: function() {
+
+				let url = new this.url(this.location);
+
+				if(url.search) return url.searchParams;
+
+				else if(url.hash) { let params = new this.urlSearchParams(url.hash.substring(1)); return params; }
+
+				else return null;
+
+			}
+
+		}
+
+		fetchURI: {
+
+			fetch: SHARED_OBJECTS.fetch,
+			location: SHARED_OBJECTS.location,
+			
+			go: (uri, options) => {
+
+				return this.fetch(url, options).then(response => {
+			
+					if(response.status === 401) { alert('Tu hora de acceso ha caducado. Vamos a renovarla...'); this.location.reload(); }
+					
+					else return response.json();
+				
+				});
+			
+			}
+			
+		}
+
+	};
+
+
+
+	// EVENT LISTENERS
+	const EVENT_LISTENERS = {
+
+		searchSubmit: event => {
+
+			event.preventDefault(); // Avoid page reload
 		
-		getURLParams: () => {
-			
-			let shared = HELPERS.getURLParams.shared;
-			
-			let url = new shared.URL(shared.location);
-			
-			if(url.search) {
-				return url.searchParams;
+			let userInput = event.target.elements['search-input'].value; // Get user input
+
+			if(userInput && userInput !== SHARED_OBJECTS.lastSearch) {
+
+				SHARED_OBJECTS.lastSearch = userInput;
+
+				let uri;
+
+				for(let type of ['track', 'artist', 'album']) {
+
+					uri = MAIN_DATA.spotifyAPI.search.uri + `&type=${type}&q=${type}:${userInput}`;
+
+					HELPERS.fetchURI(uri, MAIN_DATA.spotifyAPI.search.options)
+								.then(results => displayResults.go(results))
+									.catch(error => alert(error));
+
+				}
+
 			}
-			
-			else if(url.hash) {
-				let urlParams = new shared.URLParams(url.hash.substring(1));
-				return urlParams;
-			}
-			
-			else {
-				return null;
-			}
-			
+
 		},
-		
-		fetchFromAPI: (APIUri, APIOptions) => {
-		
-			let data = HELPERS.fetchFromAPI.data, shared = HELPERS.fetchFromAPI.shared, fetchAPI = shared.fetch;
-			
-			fetchAPI(APIUri, APIOptions).then(response => {
-				
-				if(response.status === 401) {
-					alert('Tu hora de acceso ha caducado. Vamos a renovarla...');
-					shared.location.reload();
-				}
-				
-				else {
-					return response.json();
-				}
-			
-			});
-		
-		}
-		
-	};
-	HELPERS.getURLParams.shared = {
-		URL: SHARED.URL,
-		location: SHARED.location,
-		URLParams: SHARED.URLSearchParams
-	};
-	HELPERS.fetchFromAPI.shared = {
-		encode: SHARED.encode,
-		fetch: SHARED.fetch,
-		location: SHARED.location
-	};
 
-	// Append results to DOM
-	function displaySearchResults(results) {
+		pickResult: event => {
 
-		let data = displaySearchResults.data, shared = displaySearchResults.shared;
-		
-		let htmlItems = '';
-		
-		if(results.tracks) {
-		
-			if(results.tracks.items.length) {
-
-				let imageSrc, albumType, albumText, albumName;
-
-				for(let item of results.tracks.items) {
-
-					imageSrc = item.images && item.images.length ? item.images[0].url : data.fallbackImageUri;
-					albumType = item.album.album_type;
-					albumName = item.album.name;
-					
-					if(albumType) {
-						albumText = albumType === 'compilation' ?
-							`Del recopilatorio <span>${albumName}</span>`
-							:
-							`Del ${albumType} <span>${albumName}</span>`;
-					}
-					else {
-						albumText = 'Tema sin clasificar';
-					}
-
-					htmlItems += `
-
-						<li class="result-item" data-id="${item.id}">
-
-							<img src="${imageSrc}" alt="Track Image" />
-							<div>
-								<h5 class="result-artist result-info">${item.artists[0].name}</h5>
-								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">${albumText}</h6>
-							</div>
-
-						</li>
-
-					`;
-
-				}
-
-			}
-
-			else {
-
-				htmlItems += `<li class="no-results">Pues no, no tenemos ese tema</li>`;
-
-			}
-
-			shared.songResultsList.innerHTML = htmlItems;
-			shared.songResultsList.scrollTop = 0;
-			
-		}
-		
-		else if(results.artists) {
-		
-			if(results.artists.items.length) {
-
-				let imageSrc, genres, genresText;
-
-				for(let item of results.artists.items) {
-
-					imageSrc = item.images && item.images.length ? item.images[0].url : data.fallbackImageUri;
-					genres = item.genres.map(genre => genre.split(' ').map(word => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase()).join(' ')).join(', ');
-					genresText = genres ? `Estilo: <span>${genres}</span>` : 'No tiene estilo';
-					
-					htmlItems += `
-
-						<li class="result-item">
-
-							<img src="${imageSrc}" alt="Artist Image" />
-							<div>
-								<h5 class="result-artist result-info">Popularidad:&nbsp;${item.popularity}</h5>
-								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">${genresText}</h6>
-							</div>
-
-						</li>
-
-					`;
-
-				}
-
-			}
-
-			else {
-
-				htmlItems += `<li class="no-results">Pues no, no tenemos ese artista</li>`;
-
-			}
-
-			shared.artistResultsList.innerHTML = htmlItems;
-			shared.artistResultsList.scrollTop = 0;
-			
-		}
-		
-		else if(results.albums) {
-		
-			if(results.albums.items.length) {
-
-				let imageSrc, artists, albumType, infoText;
-
-				for(let item of results.albums.items) {
-
-					imageSrc = item.images && item.images.length ? item.images[0].url : data.fallbackImageUri;
-					artists = item.artists.map(artist => artist.name).join(' | ');
-					albumType = item.album_type === 'compilation' ? 'recopilatorio' : item.album_type;
-					albumType = albumType.charAt(0).toUpperCase() + albumType.substr(1).toLowerCase();
-					infoText = `${albumType} &copysr; <span>${item.release_date}</span>`;
-
-					htmlItems += `
-
-						<li class="result-item">
-
-							<img src="${imageSrc}" alt="Album Image" />
-							<div>
-								<h5 class="result-artist result-info">${artists}</h5>
-								<h4 class="result-title result-info">${item.name}</h4>
-								<h6 class="result-album result-info">${infoText}</h6>
-							</div>
-
-						</li>
-
-					`;
-
-				}
-
-			}
-
-			else {
-
-				htmlItems += `<li class="no-results">Pues no, no tenemos ese album</li>`;
-
-			}
-
-			shared.albumResultsList.innerHTML = htmlItems;
-			shared.albumResultsList.scrollTop = 0;
-			
-		}
-
-	}
-	displaySearchResults.data = {
-		fallbackImageUri: DATA.fallbackImageUri
-	};
-	displaySearchResults.shared = {};
-
-	// Handler for "submit" Event
-	function searchSubmit(sEvent) {
-		
-		sEvent.preventDefault();
-		
-		let userInput = sEvent.target.elements['search-input'].value;
-
-		if(userInput && userInput !== searchSubmit.data.lastInput) {
-
-			let data = searchSubmit.data, helpers = searchSubmit.helpers;
-			
-			data.lastInput = userInput;
-
-			if(!data.searchOptions.headers['Authorization']) {
-				data.searchOptions.headers['Authorization'] = `Bearer ${data.accessToken}`;
-			}
-
-			let APIUri;
-
-			for(let type of ['track', 'artist', 'album']) {
-
-				APIUri = `${data.searchUri}&type=${type}&q=${type}:${input}`;
-
-				search(APIUri, data.searchOptions).then(response => {
-					if(response.status === 401) {
-						alert('Tu hora de acceso ha caducado. Vamos a renovarla...');
-						shared.location.reload();
-					}
-					else {
-						return response.json();
-					}
-				}).then(results => displaySearchResults(results)).catch(error => alert(error));
-
-			}
-
-		}
-		
-	}
-	searchSubmit.data = {
-		searchUri: DATA.searchUri,
-		searchOptions: DATA.searchOptions
-	};
-	searchSubmit.helpers = {
-		fetchFromAPI: HELPERS.fetchFromAPI
-	};
-	
-	// Handler for "mousedown" Event
-	function documentMouseDown(mdEvent) {
-		
-		let target = mdEvent.target;
-		
-		while(target.parentElement) {
-			
-			if(target.className === 'result-item' && target.parentElement.id === 'songs-list') {
-				
-				let data = documentMouseDown.data;
-				
-				data.pickedResultId = target.dataset.id;
-				data.pickedResultTitle = target.querySelector('.result-title').textContent;
-				
-				break;
-				
-			}
-			
-			target = target.parentElement;
-			
-		}
-
-	}
-	documentMouseDown.data = {
-		pickedResultId: null,
-		pickedResultTitle: null
-	};
-
-	// Handler for "mouseup" Event
-	function documentMouseUp(muEvent) {
-		
-		let data = documentMouseUp.data;
-		
-		if(data.pickedResultId && data.pickedResultTitle) {
-		
-			let target = muEvent.target;
+			let target = event.target;
 			
 			while(target.parentElement) {
 				
-				if(target.id === 'user-list') {
-				
-					let userItem = documentMouseUp.shared.doc.createElement('li');
-					userItem.setAttribute('data-id', data.pickedResultId);
-					userItem.textContent = data.pickedResultTitle;
-					target.appendChild(userItem);
+				if(target.className === 'result-item' && target.parentElement.id === 'songs-list') {
 					
-					data.pickedResultId = null;
-					data.pickedResultTitle = null;
+					SHARED_OBJECTS.pickedResult.id = target.dataset.id;
+					SHARED_OBJECTS.pickedResult.title = target.querySelector('h4.result-title').textContent;
 					
 					break;
-				
+					
 				}
 				
 				target = target.parentElement;
 				
 			}
-		
+
+		},
+
+		dropResult: event => {
+
+			if(SHARED_OBJECTS.pickedResult.id && SHARED_OBJECTS.pickedResult.title) {
+			
+				let target = event.target;
+				
+				while(target.parentElement) {
+					
+					if(target.id === 'user-list') {
+					
+						let droppedResult = SHARED_OBJECTS.dom.document.createElement('li');
+						droppedResult.setAttribute('data-id', SHARED_OBJECTS.pickedResult.id);
+						droppedResult.textContent = SHARED_OBJECTS.pickedResult.title;
+						target.appendChild(droppedResult);
+						
+						SHARED_OBJECTS.pickedResult.id = null;
+						SHARED_OBJECTS.pickedResult.title = null;
+						
+						break;
+					
+					}
+					
+					target = target.parentElement;
+					
+				}
+			
+			}
+
+		},
+
+		clickUserTrack: event => {
+
+			let target = event.target;
+	
+			if(target.parentElement.id === 'user-list') {
+			
+				let uri = `${MAIN_DATA.spotifyAPI.getTrack.uri}${target.dataset.id}`;
+				
+				HELPERS.fetchURI(uri, MAIN_DATA.spotifyAPI.getTrack.options)
+							.then(result => console.log(result))
+								.catch(error => alert(error));
+			
+			}
+
 		}
 
-	}
-	documentMouseUp.data = documentMouseDown.data;
-	documentMouseUp.shared = {
-		doc: SHARED.doc
-	};
-	
-	// Handler for "click" Event
-	function documentClick(cEvent) {
-		
-		let target = cEvent.target;
-	
-		if(target.parentElement.id === 'user-list') {
-		
-			let data = documentClick.data, helpers = documentClick.helpers;
-			
-			let APIUri = `${documentClick.data.APIUri}${target.dataset.id}`;
-			
-			helpers.fetchFromAPI(APIUri).then(songObject => console.log(songObject));
-		
-		}
-	
-	}
-	documentClick.data = {
-		getTrackUri: DATA.getTrackAPIUri,
-		getTrackOptions: DATA.getTrackOptions,
-		accessToken: DATA.accessToken;
-	};
-	documentClick.helpers = {
-		fetchFromAPI: HELPERS.fetchFromAPI
 	};
 
-	// Get DOM references and set DOM events (search click) and SHOW APP !!!
-	function workWithDOM() {
+
+
+	// DISPLAY_RESULTS
+	const displayResults = {
+
+		// Resources
+		fallbackImageUri: MAIN_DATA.fallbackImageUri, // Data
+		trackResultsList: SHARED_OBJECTS.dom.trackResultsList, // Shared
+		artistResultsList: SHARED_OBJECTS.dom.artistResultsList, // Shared
+		albumResultsList: SHARED_OBJECTS.dom.albumResultsList, // Shared
+
+		go: function(results) {
+
+			let list; // Reusable list (add items here)
+
+			// A: If results have TRACK OBJECTS
+			if(results.tracks) {
+
+				// If not empty array, add tracks to list
+				if(results.tracks.items.length) {
+
+					list = ''; // Reset list
+
+					let imageSrc = this.fallbackImageUri; // Tracks don't have images, so we set image source to fallbackImageUri
+					let artistNames, albumType, albumName, albumText; // Declare reusable variables for looping
+
+					// Loop track results
+					for(let track of results.tracks.items) {
+
+						artistNames = track.artists.map(artist => artist.name.toUpperCase()).join(' | '); // Get artist names
+						albumType = track.album.album_type; // Get track album type
+						albumName = track.album.name; // Get track album name
+
+						// Set track album text (change "compilation" for "recopilatorio" if needed)
+						albumText = albumType === 'compilation' ?	`Del recopilatorio <span>${albumName}</span>`:
+																	`Del ${albumType} <span>${albumName}</span>`;
+
+						// If track album type falsy (empty string ???)
+						else albumText = 'Tema sin clasificar';
+
+						// Add track to list - set <li> item data-id attribute to Spotify track id
+						list += `
+
+							<li class="spotify-result" data-id="${item.id}">
+
+								<img src="${imageSrc}" alt="Track Image" />
+								<div>
+									<h5 class="spotify-result-info pos-top">${artistNames}</h5>
+									<h4 class="spotify-result-info pos-mid">${track.name}</h4>
+									<h6 class="spotify-result-info pos-bot">${albumText}</h6>
+								</div>
+
+							</li>
+
+						`;
+
+					}
+
+				}
+
+				// If empty array, add "NO TRACK RESULTS" message to list
+				else list = '<li class="spotify-no-results">Pues no, no tenemos ese tema</li>';
+
+				this.trackResultsList.innerHTML = list; // Show list (replace old one)
+				this.trackResultsList.scrollTop = 0; // Reset list scroll to top
+
+			}
+
+			// B: If results have ARTIST OBJECTS
+			else if(results.artists) {
+
+				// If not empty array, add artists to list
+				if(results.artists.items.length) {
+
+					list = ''; // Reset list
+
+					let imageSrc, genres; // Declare reusable variables for looping
+
+					// Loop ertist results
+					for(let item of results.artists.items) {
+
+						// If artist has images, set imageSrc to max resolution image (first in array), if not, set it to fallback
+						imageSrc = item.images.length ? item.images[0].url : this.fallbackImageUri;
+
+						genres = item.genres.map(genre => genre.toUpperCase()).join(', '); // Get artist genres, if any
+
+						// Set artist genres or fallback
+						genres = genres ?	`Estilo: <span>${genres}</span>`:
+											'No tiene estilo';
+
+						// Add artists to list
+						listTemplate += `
+
+							<li class="spotify-result">
+
+								<img src="${imageSrc}" alt="Artist Image" />
+								<div>
+									<h5 class="spotify-result-info pos-top">Popularidad:&nbsp;${item.popularity}</h5>
+									<h4 class="spotify-result-info pos-mid">${item.name}</h4>
+									<h6 class="spotify-result-info pos-bot">${genres}</h6>
+								</div>
+
+							</li>
+
+						`;
+
+					}
+
+				}
+
+				// If array is empty, add "NO ARTIST RESULTS" message to list
+				else list = '<li class="spotify-no-results">Pues no, no tenemos ese artista</li>';
+
+				this.artistResultsList.innerHTML = list; // Show list (replace old one)
+				this.artistResultsList.scrollTop = 0; // Reset list scroll to top
+
+			}
 		
-		let shared = workWithDOM.shared;
-		
-		displaySearchResults.shared.songResultsList = shared.doc.getElementById('songs-list');
-		displaySearchResults.shared.artistResultsList = shared.doc.getElementById('artists-list');
-		displaySearchResults.shared.albumResultsList = shared.doc.getElementById('albums-list');
-		searchSubmit.shared.fetch = window.fetch;
-		
-		shared.doc.addEventListener('mousedown', documentMouseDown);
-		shared.doc.addEventListener('mouseup', documentMouseUp);
-		shared.doc.forms['search-form'].addEventListener('submit', searchSubmit);
-		
-		shared.doc.body.style.display = 'grid'; // Show APP !!!
-		
-	}
-	workWithDOM.shared = {
-		doc: SHARED.doc
-	};
-  
-	// Initialize
-	function init() {
-		
-		const data = init.data, shared = init.shared, helpers = init.helpers;
-		
-		let urlParams = helpers.getURLParams();
-		
-		if(!urlParams) {
-			shared.location.replace(data.uri);
+			// C: If results have ALBUM OBJECTS
+			else if(results.albums) {
+			
+				// If not empty array, add albums to list
+				if(results.albums.items.length) {
+
+					let imageSrc, artistNames, type, info; // Declare reusable variables for looping
+
+					// Loop album results
+					for(let album of results.albums.items) {
+
+						// If album has images, set imageSrc to max resolution image (first in array), if not, set it to fallback
+						imageSrc = album.images.length ? album.images[0].url : this.fallbackImageUri;
+
+						artistNames = album.artists.map(artist => artist.name.toUpperCase()).join(' | '); // Get artist names
+
+						// Get album type (change "compilation" for "recopilatorio" if needed)
+						type = album.album_type === 'compilation' ? 'recopilatorio' : album.album_type;
+						type = type.charAt(0).toUpperCase() + type.substr(1).toLowerCase(); // Titlecase album type
+
+						info = `${type} &copysr; <span>${album.release_date}</span>`; // Get album info
+
+						// Add albums to list
+						list += `
+
+							<li class="spotify-result">
+
+								<img src="${imageSrc}" alt="Album Image" />
+								<div>
+									<h5 class="spotify-result-info pos-top">${artistNames}</h5>
+									<h4 class="spotify-result-info pos-mid">${album.name}</h4>
+									<h6 class="spotify-result-info pos-bot">${info}</h6>
+								</div>
+
+							</li>
+
+						`;
+
+					}
+
+				}
+
+				// If array is empty, display "NO ALBUM RESULTS" message
+				else list = '<li class="spotify-no-results">Pues no, no tenemos ese album</li>';
+
+				this.albumResultsList.innerHTML = list; // Show list (replace old one)
+				this.albumResultsList.scrollTop = 0; // Reset list scroll to top
+				
+			}
+
 		}
-		
-		else if(urlParams.has('access_token') && urlParams.has('token_type') && urlParams.has('expires_in')) {
-			
-			shared.location.hash = '';
-			
-			
-			searchSubmit.data.accessToken = urlParams.get('access_token');
-			
-			workWithDOM();
-			
-		}
-	}
-	init.data = {
-		uri: DATA.implicitGrantUri
-	};
-	init.shared = {
-		location: SHARED.location
-	};
-	init.helpers = {
-		getURLParams: HELPERS.getURLParams
+
 	};
 
-	document.addEventListener('DOMContentLoaded', init); // Add DOM load event
+	// 2: WORK_WITH_DOM - Get DOM references, set Events and SHOW APP !!!
+	const workWithDOM = {
+
+		// Resources
+		shared: SHARED_OBJECTS, // Output
+		searchSubmit: EVENT_LISTENERS.searchSubmit, // Event
+		pickResult: EVENT_LISTENERS.pickResult, // Event
+		dropResult: EVENT_LISTENERS.dropResult, // Event
+		clickUserTrack: EVENT_LISTENERS.clickUserTrack, // Event
+
+		go: function() {
+
+			let doc = this.shared.window.document; // Get document object
+
+			// Get DOM references
+			this.shared.dom = {
+				document: doc,
+				trackResultsList: doc.getElementById('spotify-track-results-list'),
+				artistResultsList: doc.getElementById('spotify-artist-results-list'),
+				albumResultsList: doc.getElementById('spotify-album-results-list')
+			};
+
+			doc.forms['spotify-search'].addEventListener('submit', this.searchSubmit); // Set searchSubmit Event
+			doc.addEventListener('mousedown', this.pickResult); // Set pickResult Event
+			doc.addEventListener('mouseup', this.dropResult); // Set dropResult Event
+			doc.addEventListener('click', this.clickUserTrack); // Set clickUserTrack Event
+
+			doc.body.style.display = 'grid'; // Show APP !!!
+			
+		}
+
+	};
+
+	// 1: INITIALIZE - get/set Access Token -> 2: WORK_WITH_DOM
+	const initialize = {
+
+		// Resources
+		location: SHARED_OBJECTS.location, // Shared
+		getURLParams: HELPERS.getURLParams, // Helper
+		workWithDOM: workWithDOM, // Listener
+		accessToken: MAIN_DATA.spotifyAPI.accessToken, // Output
+
+		go: function() {
+
+			let urlParams = this.getURLParams.go(); // Get URL parameters
+
+			// A: If no parameters, get Token (redirect)
+			if(!urlParams) this.location.replace(this.accessToken.location);
+
+			// B: If parameters has access_token=[?]&token_type=[?]&expires_in=[?], set Access Token -> 2: WORK_WITH_DOM
+			else if(urlParams.has('access_token') && urlParams.has('token_type') && urlParams.has('expires_in')) {
+			
+				this.location.hash = ''; // Remove URL hash (no need to show it)
+
+				let token = urlParams.get('access_token'); // Get Access Token
+				
+				this.accessToken.value = token; // Set Access Token value
+				this.accessToken.header['Authorization'] += token; // Set Access Token header
+				
+				this.workWithDOM(); // -> 2: WORK_WITH_DOM
+				
+			}
+
+		}
+
+	};
+
+	// Add DOM load event
+	WINDOW.document.addEventListener('DOMContentLoaded', initialize.go);
 
 })(window);
 
@@ -459,9 +456,18 @@ let APP = (WINDOW => {
 		}
 	}
 	authorizationCode.data = {
-		codeUri: DATA.authorizationCodeUri,
-		tokenUri: DATA.authorizationTokensUri,
-		tokenOptions: DATA.authorizationTokenOptions
+		codeUri: `
+			https://accounts.spotify.com/authorize?
+				response_type=code&
+				client_id=${MAIN_DATA.spotifyAPI.clientId}&
+				redirect_uri=${MAIN_DATA.spotifyAPI.redirectURI}
+		`,
+		tokenUri: 'https://accounts.spotify.com/api/token',
+		tokenOptions: {
+			method: 'POST',
+			headers: { Authorization: `Basic ${[WINDOW.atob(MAIN_DATA.spotifyAPI.clientId), WINDOW.atob(MAIN_DATA.spotifyAPI.clientSecret)].join(':')}` },
+			body: { grant_type: 'authorization_code', redirect_uri: MAIN_DATA.spotifyAPI.redirectURI }
+		}
 	};
 	authorizationCode.shared = {
 		location: SHARED.location,
