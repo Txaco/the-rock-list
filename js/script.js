@@ -44,7 +44,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 		artistResultsList: null,
 		albumResultsList: null,
 		lastSearch: null, // EVENT_LISTENERS.searchSubmit(event) adds this value
-		pickedResult: {} // EVENT_LISTENERS.pickResult(event) adds pickedResult.id and pickedResult.title
+		pickedResult: { id: null, title: null } // EVENT_LISTENERS.pickResult(event) adds pickedResult.id and pickedResult.title
 
 	};
 
@@ -136,9 +136,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 					uri = MAIN_DATA.spotifyAPI.search.uri + `&type=${type}&q=${type}:${userInput}`;
 
-					HELPER_FUNCTIONS.fetchURI(uri, MAIN_DATA.spotifyAPI.search.options)
-								.then(results => displayResults(results))
-									.catch(error => alert(error));
+					HELPER_FUNCTIONS.fetchURI(uri, MAIN_DATA.spotifyAPI.search.options).then(results => displayResults(results));
 
 				}
 
