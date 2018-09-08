@@ -73,7 +73,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 			}
 
-		}
+		},
 
 		fetchURI: {
 
