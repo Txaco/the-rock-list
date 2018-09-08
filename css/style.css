@@ -26,8 +26,8 @@ html {
 	--blue: rgb(137, 167, 194);
 	--yellow: rgb(240, 202, 80);
 	--green: rgb(174, 193, 123);
-	--inner-shade: radial-gradient(transparent, rgba(48, 48, 48, .2));
-	--inner-light: radial-gradient(rgba(252, 252, 252, .2), transparent);
+	--inner-shade: radial-gradient(transparent, rgba(48, 48, 48, .05));
+	--inner-light: radial-gradient(rgba(252, 252, 252, .05), transparent);
 }
 
 /* Set document font properties (for rem values) */
