@@ -144,16 +144,16 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 		},
 
-		pickResult: event => {console.log(event);
+		pickResult: event => {
 
 			let target = event.target;
 			
 			while(target.parentElement) {
 				
-				if(target.className === 'result-item' && target.parentElement.id === 'songs-list') {
+				if(target.className === 'spotify-result' && target.parentElement.id === 'spotify-track-results-list') {
 					
 					SHARED_OBJECTS.pickedResult.id = target.dataset.id;
-					SHARED_OBJECTS.pickedResult.title = target.querySelector('h4.result-title').textContent;
+					SHARED_OBJECTS.pickedResult.title = target.querySelector('h4.spotify-result-info.pos-mid').textContent;
 					
 					break;
 					
@@ -165,7 +165,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 		},
 
-		dropResult: event => {console.log(event);
+		dropResult: event => {
 
 			if(SHARED_OBJECTS.pickedResult.id && SHARED_OBJECTS.pickedResult.title) {
 			
@@ -195,7 +195,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 		},
 
-		clickUserTrack: event => {console.log(event);
+		clickUserTrack: event => {
 
 			let target = event.target;
 	
