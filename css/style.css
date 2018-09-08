@@ -54,7 +54,11 @@ html, body { width: 100%; height: 100%;	}
 
 /* Set body 3x2 grid (hidden - JS will show it when ready) - Set main background (gradient) and color  */
 body {
-	grid: 'app-logo spotify-search' 10% 'user-list-title spotify-results-nav' 10% 'user-list spotify-results-list' 80% / 50% 50%;
+	grid:
+		'app-logo spotify-search' 10%
+		'user-list-title spotify-results-nav' 10%
+		'user-list spotify-results-list' 80%
+		/ 50% 50%;
 	background-color: var(--black); color: var(--white);
 }
 
@@ -170,17 +174,13 @@ body {
 	ul.spotify-results-list {
 		grid-area: spotify-results-list;
 		padding: 0 1rem; box-sizing: border-box;
-		border-top-left-radius: .2rem;
 		overflow: auto;
 		z-index: 1;
 		color: var(--black);
 	}
-	ul#spotify-track-results-list {
-		border-top-left-radius: none;
-		background-color: var(--red);
-	}
-	ul#spotify-artist-results-list { background-color: var(--green); }
-	ul#spotify-album-results-list { background-color: var(--yellow); }
+	ul#spotify-track-results-list { border-radius: 0 .2rem 0 0; background-color: var(--red); }
+	ul#spotify-artist-results-list { border-radius: .2rem .2rem 0 0; background-color: var(--green); }
+	ul#spotify-album-results-list { border-radius: .2rem 0 0 0; background-color: var(--yellow); }
 	/* Set checked results list */
 	input#spotify-track-results-button:checked ~ ul#spotify-track-results-list,
 	input#spotify-artist-results-button:checked ~ ul#spotify-artist-results-list,
