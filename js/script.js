@@ -136,7 +136,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 					uri = MAIN_DATA.spotifyAPI.search.uri + `&type=${type}&q=${type}:${userInput}`;
 
-					HELPER_FUNCTIONS.fetchURI(uri, MAIN_DATA.spotifyAPI.search.options).then(results => displayResults(results));
+					HELPER_FUNCTIONS.fetchURI(uri, MAIN_DATA.spotifyAPI.search.options).then(results => { displayResults(results); });
 
 				}
 
