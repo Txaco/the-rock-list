@@ -234,7 +234,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 				// Loop track results
 				for(let track of results.tracks.items) {
 
-					artistNames = track.artists.map(artist => artist.name.toUpperCase()).join(' | '); // Get artist names
+					artistNames = track.artists.map(artist => artist.name).join(' | '); // Get artist names
 					albumType = track.album.album_type; // Get track album type
 					albumName = track.album.name; // Get track album name
 
@@ -286,7 +286,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 					// If artist has images, set imageSrc to max resolution image (first in array), if not, set it to fallback
 					imageSrc = artist.images.length ? artist.images[0].url : MAIN_DATA.fallbackImageURI;
 
-					genres = artist.genres.map(genre => genre.toUpperCase()).join(', '); // Get artist genres, if any
+					genres = artist.genres.join(', '); // Get artist genres, if any
 					genres = genres ? `Estilo: <span>${genres}</span>`: 'No tiene estilo'; // Set artist genres or fallback
 
 					// Add artists to list
@@ -333,11 +333,10 @@ let THE_ROCK_LIST = ( WINDOW => {
 					// If album has images, set imageSrc to max resolution image (first in array), if not, set it to fallback
 					imageSrc = album.images.length ? album.images[0].url : MAIN_DATA.fallbackImageURI;
 
-					artistNames = album.artists.map(artist => artist.name.toUpperCase()).join(' | '); // Get artist names
+					artistNames = album.artists.map(artist => artist.name).join(' | '); // Get artist names
 
 					// Get album type (change "compilation" for "recopilatorio" if needed)
 					type = album.album_type === 'compilation' ? 'recopilatorio' : album.album_type;
-					type = type.charAt(0).toUpperCase() + type.substr(1).toLowerCase(); // Titlecase album type
 
 					info = `${type} &copysr; <span>${album.release_date}</span>`; // Get album info
 
