@@ -173,7 +173,7 @@ body {
 	/* Grid 3x2: Spotify Results Lists */
 	ul.spotify-results-list {
 		grid-area: spotify-results-list;
-		padding: 0 1rem; box-sizing: border-box;
+		padding: 0 1rem; border-top: solid 1rem transparent; box-sizing: border-box;
 		overflow: auto;
 		z-index: 1;
 		color: var(--black);
@@ -193,8 +193,8 @@ body {
 		} 
 
 		li.spotify-result {
-			height: calc(25% - 1.25rem);
-			margin: 1rem 0;
+			height: calc(25% - 1rem);
+			margin-bottom: 1rem;
 			display: flex; flex-flow: row nowrap;
 			background: var(--white); color: var(--black);
 			font-family: 'Source Code Pro';
