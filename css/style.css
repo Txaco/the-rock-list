@@ -1,31 +1,36 @@
+/* Reset elements - input, button inherit font from parent */
 body, h1, h2, h3, h4, h5, h6, p, ul { margin: 0; }
 input, button, ul { padding: 0; }
 input, button { border: none; font: inherit; }
 ul { list-style: none; }
 
-html {
-	-webkit-tap-highlight-color:transparent;
-}
-
+/* Set improvements and disallow text selecting */
+html { -webkit-tap-highlight-color: transparent; }
 body {
-	-webkit-touch-callout:none;
-	-webkit-user-select:none;
-	-khtml-user-select:none;
-	-moz-user-select:none;
-	-ms-user-select:none;
-	user-select:none;
-	text-rendering:optimizeLegibility;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	text-rendering: optimizeLegibility;
 }
 
+/* Set color scheme */
 html {
-	--z: rgb(7, 7, 7);
-	--a: rgb(252, 252, 252);
-	--r: rgb(193, 57, 94);
-	--b: rgb(137, 167, 194);
-	--y: rgb(240, 202, 80);
-	--g: rgb(174, 193, 123);
+	--black: rgb(0, 0, 0);
+	--almost-black: rgb(48, 48, 48);
+	--white: rgb(252, 252, 252);
+	--grey: rgb(204, 204, 204);
+	--red: rgb(193, 57, 94);
+	--blue: rgb(137, 167, 194);
+	--yellow: rgb(240, 202, 80);
+	--green: rgb(174, 193, 123);
+	--inner-shade: radial-gradient(transparent, rgba(48, 48, 48, .2));
+	--inner-light: radial-gradient(rgba(252, 252, 252, .2), transparent);
 }
 
+/* Set document font properties (for rem values) */
 html {
 	font-style: normal;
 	font-variant: normal;
@@ -36,207 +41,164 @@ html {
 	font-family: 'Raleway';
 }
 
-html, body {
-	width: 100%;
-	height: 100%;	
-}
+/* Set document dimensions (full width and height) */
+html, body { width: 100%; height: 100%;	}
 
+/* Set body 3x2 grid (hidden - JS will show it when ready) - Set main background (gradient) and color  */
 body {
+	grid: 'app-logo spotify-search' 10% 'user-list-title spotify-results-nav' 10% 'user-list spotify-results-list' 80% / 50% 50%;
+	background-color: var(--black); background-image: var(--inner-light); color: var(--white);
 	display: none;
-	grid: 'app-logo search-form' 10% 'user-header search-nav' 10% 'user-list results-list' 80% / 50% 50%;
-	background: var(--z);
-	color: var(--a);
 }
 
-	/* App Logo */
+	/****************/
+	/* LEFT SECTION */
+	/****************/
+
+	/* Grid 1x1: App Logo */
 	header#app-logo {
 		grid-area: app-logo;
-		display: flex;
-		justify-content: space-evenly;
-		align-items: center;
+		display: flex; justify-content: space-evenly; align-items: center;
 	}
-	header#app-logo > h1 {
-		font-size: 4rem;
-		font-weight: 900;
-	}
-	header#app-logo > h2 {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		font-size: 1.4rem;
-		font-weight: 300;
-	}
-
-		/* User Header */
-		h3#user-header {
-			grid-area: user-header;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 3rem;
-			font-weight: 100;
+		header#app-logo > h1 { font-size: 4rem; font-weight: 900; }
+		header#app-logo > h2 {
+			display: flex; flex-direction: column; align-items: center;
+			font-size: 1.4rem; font-weight: 300;
 		}
 
-			/* User List */
-			ul#user-list {
-				grid-area: user-list;
-				list-style: inside decimal-leading-zero;
-				width: calc(100% - 2rem);
-				margin: 0 1rem;
-				padding: 0 1rem;
-				box-sizing: border-box;
-				border-top-left-radius: .2rem;
-				border-top-right-radius: .2rem;
-				overflow: auto;
-				z-index: 1;
-				font-size: 2rem;
-				font-weight: 900;
-				background: var(--a);
-				color: var(--z);
-			}
-			ul#user-list > li {
-				line-height: 1.5;
-				cursor: pointer;
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
-
-	/* Search Form */
-	form#search-form {
-		grid-area: search-form;
-	}
-	form#search-form > input {
-		display: block;
-		width: 80%;
-		height: 100%;
-		float: left;
-		font-size: 3rem;
-		font-weight: 900;
-		padding: 1rem;
-		border-bottom-left-radius: .2rem;
-		border-bottom-right-radius: .2rem;
-		box-sizing: border-box;
-		background: var(--a);
-		color: var(--z);
-	}
-	input[type="text"]::placeholder {
-		text-align: center;
-		opacity: 1;
-		border-bottom-left-radius: .2rem;
-		border-bottom-right-radius: .2rem;
-		background: var(--z);
-		color: var(--a);
-	}
-	input[type="text"]:focus::placeholder {
-		border-bottom-left-radius: .2rem;
-		border-bottom-right-radius: .2rem;
-		background: none;
-	}
-	form#search-form > button {
-		width: 20%;
-		height: 100%;
-		cursor: pointer;
-		background: var(--z);
-	}
-	form#search-form > button:active { background: var(--r); }
-	form#search-form > button > svg {
-		display: block;
-		height: 100%;
-		margin: 0 auto;
-		stroke: var(--a);
+	/* Grid 2x1: User List Title */
+	h3#user-list-title {
+		grid-area: user-list-title;
+		display: flex; justify-content: center; align-items: center;
+		font-size: 3rem; font-weight: 100;
 	}
 
-		/* Search Nav */
-		nav#search-nav {
-			grid-area: search-nav;
-			display: flex;
-			align-items: flex-end;
-			font-size: 1.7rem;
-			font-weight: 700;
+	/* Grid 3x1: User List */
+	ul#user-list {
+		grid-area: user-list;
+		list-style: inside decimal-leading-zero;
+		width: calc(100% - 2rem);
+		margin: 0 1rem; padding: 0 1rem; box-sizing: border-box;
+		border-top-left-radius: .2rem; border-top-right-radius: .2rem;
+		overflow: auto;
+		z-index: 1;
+		font-size: 2rem; font-weight: 900;
+		background-color: var(--white); background-image: var(--inner-shade); color: var(--almost-black);
+	}
+		ul#user-list > li {
+			line-height: 1.5;
+			cursor: pointer;
+			white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 		}
-		nav#search-nav > label {
-			flex: 1;
+
+
+
+	/*****************/
+	/* RIGHT SECTION */
+	/*****************/
+
+	/* Grid 1x2: Spotify Search */
+	form#spotify-search { grid-area: search-form; }
+		input#spotify-search-input {
+			display: block; float: left;
+			width: 80%; height: 100%;
+			font-size: 3rem; font-weight: 900;
+			padding: 1rem; box-sizing: border-box;
+			border-bottom-left-radius: .2rem; border-bottom-right-radius: .2rem;
+			background-color: var(--white); background-image: var(--inner-shade); color: var(--almost-black);
+		}
+		input#spotify-search-input::placeholder {
+			text-align: center;
+			opacity: 1;
+			border-bottom-left-radius: .2rem; border-bottom-right-radius: .2rem;
+			background-color: transparent; color: var(--grey);
+		}
+		input#spotify-search-input:focus::placeholder {
+			border-bottom-left-radius: .2rem; border-bottom-right-radius: .2rem;
+			background-color: transparent;
+		}
+		button#spotify-search-button {
+			width: 20%; height: 100%;
+			cursor: pointer;
+			background-color: var(--red);
+		}
+		button#spotify-search-button:active { background-image: var(--inner-shade); }
+		button#spotify-search-button > svg {
+			display: block;
+			height: 100%;
+			margin: 0 auto;
+			stroke: var(--white);
+		}
+
+
+
+	/* Grid 2x2: Spotify Results Navigation */
+	input[name="spotify-results-button"] { display: none; } /* Hide results navigation radio inputs */
+	nav#spotify-results-nav {
+		grid-area: spotify-results-nav;
+		display: flex; align-items: flex-end;
+		font-size: 1.7rem; font-weight: 700;
+	}
+		nav#spotify-results-nav > label {
 			height: calc(100% - 2rem);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			cursor:pointer;
-			border-top-left-radius: .2rem;
-			border-top-right-radius: .2rem;
+			flex: 1;
+			display: flex; justify-content: center; align-items: center;
+			border-top-left-radius: .2rem; border-top-right-radius: .2rem;
+			cursor: pointer;
+		}
+		/* Set checked button label */
+		input#spotify-track-results-button:checked ~ nav > label[for="spotify-track-results-button"] {
+			background-color: var(--yellow); color: var(--almost-black);
+		}
+		input#spotify-artist-results-button:checked ~ nav > label[for="spotify-artist-results-button"] {
+			background-color: var(--blue); color: var(--almost-black);
+		}
+		input#spotify-album-results-button:checked ~ nav > label[for="spotify-album-results-button"] {
+			background-color: var(--green); color: var(--almost-black);
 		}
 
-			/* Results Lists */
-			ul.results-list {
-				grid-area: results-list;
-				padding: 0 1rem;
-				overflow: auto;
-				z-index: 1;
-				box-sizing: border-box;
-				color: var(--z);
-			}
-			ul#songs-list { background: var(--y); }
-			ul#artists-list { background: var(--b); }
-			ul#albums-list { background: var(--g); }
-			li.result-item {
-				height: calc(25% - 1.25rem);
-				margin: 1rem 0;
-				display: flex;
-				flex-flow: row nowrap;
-				background: var(--a);
-				color: var(--z);
-				box-shadow:
-					0 3px 6px rgba(0, 0, 0, .16),
-					0 3px 6px rgba(0, 0, 0, .23);
-			}
-			li.no-results {
-				margin-top: 2rem;
-				text-align: center;
-				font-size: 2rem;
-				font-weight: 900;
-			} 
-			li.result-item > img {
+
+	/* Grid 3x2: Spotify Results Lists */
+	ul.spotify-results-list {
+		grid-area: spotify-results-list;
+		padding: 0 1rem; box-sizing: border-box;
+		overflow: auto;
+		z-index: 1;
+		background-image: var(--inner-light); color: var(--almost-black);
+	}
+	ul#spotify-track-results-list { background-color: var(--yellow); }
+	ul#spotify-artist-results-list { background-color: var(--blue); }
+	ul#spotify-album-results-list { background-color: var(--green); }
+		li.spotify-no-results {
+			margin-top: 2rem;
+			text-align: center;
+			font-size: 2rem; font-weight: 900;
+		} 
+
+		li.spotify-result {
+			height: calc(25% - 1.25rem);
+			margin: 1rem 0;
+			display: flex; flex-flow: row nowrap;
+			background: var(--white); background-image: var(--inner-shade); color: var(--almost-black);
+			box-shadow: 0 3px 6px rgba(48, 48, 48, .16), 0 3px 6px rgba(48, 48, 48, .23);
+		}
+			li.spotify-result > img {
 				display: block;
 				height: 100%;
 			}
-			li.result-item > div {
-				display: flex;
-				flex-flow: column nowrap;
-				justify-content: space-between;
-				padding: 1rem;
-				box-sizing: border-box;
-				white-space: nowrap;
-				overflow: hidden;
+			li.spotify-result > div {
+				display: flex; flex-flow: column nowrap; justify-content: space-between;
+				padding: 1rem; box-sizing: border-box;
+				white-space: nowrap; overflow: hidden;
 			}
-			.result-info {
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
-			h5.result-artist {
-				text-transform: uppercase;
-				font-size: 1.5rem;
-				font-weight: 500;
-			}
-			h4.result-title {
-				font-size: 2rem;
-				font-weight: 900;
-			}
-			h6.result-album {
-				font-size: 1rem;
-				font-weight: 300;
-			}
-			h6.result-album > span {
-				text-transform: uppercase;
-				font-weight: 700;
-			}
-
-	/* "checked" Result Label & List */
-	input[type="radio"] { display: none; }
-
-	input#search-songs:checked ~ nav > label[for="search-songs"] { background: var(--y); color: var(--z); }
-	input#search-artists:checked ~ nav > label[for="search-artists"] { background: var(--b); color: var(--z); }
-	input#search-albums:checked ~ nav > label[for="search-albums"] { background: var(--g); color: var(--z); }
-
-	input#search-songs:checked ~ ul#songs-list,
-	input#search-artists:checked ~ ul#artists-list,
-	input#search-albums:checked ~ ul#albums-list { z-index: 2; }
+				.spotify-result-info { overflow: hidden; text-overflow: ellipsis; }
+				.spotify-result-info.pos-top {
+					font-size: 1.5rem; font-weight: 500;
+					text-transform: uppercase;
+				}
+				.spotify-result-info.pos-mid { font-size: 2rem; font-weight: 900; }
+				.spotify-result-info.pos-bot { font-size: 1rem; font-weight: 300; }
+					.spotify-result-info.pos-bot > span {
+						font-weight: 700;
+						text-transform: uppercase;
+					}
