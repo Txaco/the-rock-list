@@ -2,6 +2,7 @@
 
 <html lang="es">
 
+	<!-- Document Head -->
 	<head>
 
 		<title>THE ROCK LIST</title>
@@ -18,11 +19,11 @@
 	<!-- HTML -->
 	<body>
 
-		<!----------------->
-		<!-- USER COLUMN -->
-		<!----------------->
+		<!------------------>
+		<!-- LEFT SECTION -->
+		<!------------------>
 
-		<!-- App Logo -->
+		<!-- APP Logo -->
 		<header id="app-logo">
 			<h1>THE ROCK LIST</h1>
 			<h2>
@@ -31,20 +32,20 @@
 			</h2>
 		</header>
 
-		<!-- User Header -->
-		<h3 id="user-header">REPERTORIO</h3>
+		<!-- User List Title -->
+		<h3 id="user-list-title">REPERTORIO</h3>
 
 		<!-- User List -->
 		<ul id="user-list"></ul>
 
 		<!------------------->
-		<!-- SEARCH COLUMN -->
+		<!-- RIGHT SECTION -->
 		<!------------------->
 
-		<!-- Search Form -->
-		<form id="search-form" action="#" method="POST">
-			<input id="search-input" name="search-input" type="text" placeholder="Busca, busca..." />
-			<button id="search-button" name="search-button" type="submit">
+		<!-- Spotify Search -->
+		<form id="spotify-search" action="#" method="POST">
+			<input id="spotify-search-input" name="spotify-search-input" type="text" placeholder="Busca, busca..." />
+			<button id="spotify-search-button" name="spotify-search-button" type="submit">
 				<svg viewBox="0 0 16 16" stroke="rgba(22, 25, 37, 1)">
 					<circle cx="6.5" cy="6.5" r="4" stroke-width="1" fill="none" />
 					<line x1="9.75" y1="9.75" x2="13" y2="13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -52,22 +53,22 @@
 			</button>
 		</form>
 		
-		<!-- Results Buttons -->
-		<input checked type="radio" id="search-songs" name="search-type" />
-		<input type="radio" id="search-artists" name="search-type" />
-		<input type="radio" id="search-albums" name="search-type" />
+		<!-- Spotify Results Buttons -->
+		<input checked type="radio" id="spotify-track-results-button" name="spotify-results-button" />
+		<input type="radio" id="spotify-artist-results-button" name="spotify-results-button" />
+		<input type="radio" id="spotify-album-results-button" name="spotify-results-button" />
 
-		<!-- Search Nav -->
-		<nav id="search-nav">
-			<label for="search-songs">TEMAS</label>
-			<label for="search-artists">ARTISTAS</label>
-			<label for="search-albums">ALBUMS</label>
+		<!-- Spotify Results Navigation -->
+		<nav id="spotify-results-nav">
+			<label for="spotify-track-results-button">TEMAS</label>
+			<label for="spotify-artist-results-button">ARTISTAS</label>
+			<label for="spotify-album-results-button">ALBUMS</label>
 		</nav>
 
-		<!-- Results Lists -->
-		<ul id="songs-list" class="results-list"></ul>
-		<ul id="artists-list" class="results-list"></ul>
-		<ul id="albums-list" class="results-list"></ul>
+		<!-- Spotify Results Lists -->
+		<ul id="spotify-track-results-list" class="spotify-results-list"></ul>
+		<ul id="spotify-artist-results-list" class="spotify-results-list"></ul>
+		<ul id="spotify-album-results-list" class="spotify-results-list"></ul>
 
 	</body>
 
