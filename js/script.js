@@ -353,7 +353,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 						</li>
 
-					`;
+					`;console.log(list);
 
 				}
 
@@ -361,8 +361,6 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 			// If array is empty, display "NO ALBUM RESULTS" message
 			else list = '<li class="spotify-no-results">Pues no, no tenemos ese album</li>';
-			
-			console.log(list);
 
 			SHARED_OBJECTS.albumResultsList.innerHTML = list; // Show list (replace old one)
 			SHARED_OBJECTS.albumResultsList.scrollTop = 0; // Reset list scroll to top
