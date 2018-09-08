@@ -230,7 +230,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 				list = ''; // Reset list
 
-				let imageSrc = this.fallbackImageUri; // Tracks don't have images, so we set image source to fallbackImageUri
+				let imageSrc = MAIN_DATA.fallbackImageUri; // Tracks don't have images, so we set image source to fallbackImageUri
 				let artistNames, albumType, albumName, albumText; // Declare reusable variables for looping
 
 				// Loop track results
