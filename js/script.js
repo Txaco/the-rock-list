@@ -230,7 +230,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 				list = ''; // Reset list
 
-				let imageSrc = MAIN_DATA.fallbackImageUri; // Tracks don't have images, so we set image source to fallbackImageUri
+				let imageSrc = MAIN_DATA.fallbackImageURI; // Tracks don't have images, so we set image source to fallbackImageUri
 				let artistNames, albumType, albumName, albumText; // Declare reusable variables for looping
 
 				// Loop track results
@@ -286,7 +286,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 				for(let artist of results.artists.items) {
 
 					// If artist has images, set imageSrc to max resolution image (first in array), if not, set it to fallback
-					imageSrc = artist.images.length ? artist.images[0].url : MAIN_DATA.fallbackImageUri;
+					imageSrc = artist.images.length ? artist.images[0].url : MAIN_DATA.fallbackImageURI;
 
 					genres = artist.genres.map(genre => genre.toUpperCase()).join(', '); // Get artist genres, if any
 					genres = genres ? `Estilo: <span>${genres}</span>`: 'No tiene estilo'; // Set artist genres or fallback
@@ -331,7 +331,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 				for(let album of results.albums.items) {
 
 					// If album has images, set imageSrc to max resolution image (first in array), if not, set it to fallback
-					imageSrc = album.images.length ? album.images[0].url : MAIN_DATA.fallbackImageUri;
+					imageSrc = album.images.length ? album.images[0].url : MAIN_DATA.fallbackImageURI;
 
 					artistNames = album.artists.map(artist => artist.name.toUpperCase()).join(' | '); // Get artist names
 
