@@ -18,16 +18,22 @@ body {
 
 /* Set color scheme */
 html {
-	--black: rgb(0, 0, 0);
-	--almost-black: rgb(48, 48, 48);
-	--white: rgb(252, 252, 252);
-	--grey: rgb(204, 204, 204);
-	--red: rgb(193, 57, 94);
-	--blue: rgb(137, 167, 194);
-	--yellow: rgb(240, 202, 80);
-	--green: rgb(174, 193, 123);
-	--inner-shade: radial-gradient(transparent, rgba(48, 48, 48, .05));
-	--inner-light: radial-gradient(rgba(252, 252, 252, .05), transparent);
+
+	--black: rgb(35, 35, 35);
+	--grey: rgb(149, 145, 140);
+	--white: rgb(255, 250, 250);
+
+	--red: rgb(238, 32, 77);
+	--green: rgb(28, 172, 120);
+	--yellow: rgb(252, 232, 131);
+	--blue: rgb(31, 117, 254);
+
+	--orange: rgb(255, 117, 56);
+	--magenta: rgb(246, 100, 175);
+	--fuchsia: rgb(195, 100, 197);
+	--brown: rgb(180, 103, 77);
+	--violet: rgb(146, 110, 174);
+
 }
 
 /* Set document font properties (for rem values) */
@@ -47,7 +53,7 @@ html, body { width: 100%; height: 100%;	}
 /* Set body 3x2 grid (hidden - JS will show it when ready) - Set main background (gradient) and color  */
 body {
 	grid: 'app-logo spotify-search' 10% 'user-list-title spotify-results-nav' 10% 'user-list spotify-results-list' 80% / 50% 50%;
-	background-color: var(--black); background-image: var(--inner-light); color: var(--white);
+	background-color: var(--black); color: var(--white);
 	display: none;
 }
 
@@ -83,7 +89,7 @@ body {
 		overflow: auto;
 		z-index: 1;
 		font-size: 2rem; font-weight: 900;
-		background-color: var(--white); background-image: var(--inner-shade); color: var(--almost-black);
+		background-color: var(--white); color: var(--black);
 	}
 		ul#user-list > li {
 			line-height: 1.5;
@@ -105,24 +111,23 @@ body {
 			font-size: 3rem; font-weight: 900;
 			padding: 1rem; box-sizing: border-box;
 			border-bottom-left-radius: .2rem; border-bottom-right-radius: .2rem;
-			background-color: var(--white); background-image: var(--inner-shade); color: var(--almost-black);
+			background-color: var(--white); color: var(--black);
 		}
 		input#spotify-search-input::placeholder {
 			text-align: center;
 			opacity: 1;
-			border-bottom-left-radius: .2rem; border-bottom-right-radius: .2rem;
-			background-color: transparent; color: var(--grey);
+			background-color: var(--black); color: var(--white);
 		}
 		input#spotify-search-input:focus::placeholder {
-			border-bottom-left-radius: .2rem; border-bottom-right-radius: .2rem;
-			background-color: transparent;
+			background-color: transparent; color: transparent;
 		}
 		button#spotify-search-button {
 			width: 20%; height: 100%;
 			cursor: pointer;
-			background-color: var(--red);
+			background-color: transparent;
+			transition: transform .2s;
 		}
-		button#spotify-search-button:active { background-image: var(--inner-shade); }
+		button#spotify-search-button:active { transform: scale(.618); }
 		button#spotify-search-button > svg {
 			display: block;
 			height: 100%;
@@ -148,13 +153,13 @@ body {
 		}
 		/* Set checked button label */
 		input#spotify-track-results-button:checked ~ nav > label[for="spotify-track-results-button"] {
-			background-color: var(--yellow); color: var(--almost-black);
+			background-color: var(--red); color: var(--black);
 		}
 		input#spotify-artist-results-button:checked ~ nav > label[for="spotify-artist-results-button"] {
-			background-color: var(--blue); color: var(--almost-black);
+			background-color: var(--green); color: var(--black);
 		}
 		input#spotify-album-results-button:checked ~ nav > label[for="spotify-album-results-button"] {
-			background-color: var(--green); color: var(--almost-black);
+			background-color: var(--yellow); color: var(--black);
 		}
 
 
@@ -164,11 +169,11 @@ body {
 		padding: 0 1rem; box-sizing: border-box;
 		overflow: auto;
 		z-index: 1;
-		background-image: var(--inner-light); color: var(--almost-black);
+		color: var(--black);
 	}
-	ul#spotify-track-results-list { background-color: var(--yellow); }
-	ul#spotify-artist-results-list { background-color: var(--blue); }
-	ul#spotify-album-results-list { background-color: var(--green); }
+	ul#spotify-track-results-list { background-color: var(--red); }
+	ul#spotify-artist-results-list { background-color: var(--green); }
+	ul#spotify-album-results-list { background-color: var(--yellow); }
 	/* Set checked results list */
 	input#spotify-track-results-button:checked ~ ul#spotify-track-results-list,
 	input#spotify-artist-results-button:checked ~ ul#spotify-artist-results-list,
@@ -184,7 +189,7 @@ body {
 			height: calc(25% - 1.25rem);
 			margin: 1rem 0;
 			display: flex; flex-flow: row nowrap;
-			background: var(--white); background-image: var(--inner-shade); color: var(--almost-black);
+			background: var(--white); color: var(--black);
 			box-shadow: 0 3px 6px rgba(48, 48, 48, .16), 0 3px 6px rgba(48, 48, 48, .23);
 		}
 			li.spotify-result > img {
