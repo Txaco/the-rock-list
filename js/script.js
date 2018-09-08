@@ -144,7 +144,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 		},
 
-		pickResult: event => {
+		pickResult: event => {console.log(event);
 
 			let target = event.target;
 			
@@ -165,7 +165,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 		},
 
-		dropResult: event => {
+		dropResult: event => {console.log(event);
 
 			if(SHARED_OBJECTS.pickedResult.id && SHARED_OBJECTS.pickedResult.title) {
 			
@@ -195,7 +195,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 		},
 
-		clickUserTrack: event => {
+		clickUserTrack: event => {console.log(event);
 
 			let target = event.target;
 	
