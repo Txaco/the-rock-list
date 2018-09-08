@@ -124,7 +124,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 			event.preventDefault(); // Avoid page reload
 		
-			let userInput = event.target.elements['search-input'].value; // Get user input
+			let userInput = event.target.elements['spotify-search-input'].value; // Get user input
 
 			if(userInput && userInput !== SHARED_OBJECTS.lastSearch) {
 
