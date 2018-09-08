@@ -216,7 +216,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 
 
 	// DISPLAY_RESULTS
-	const displayResults = results => {
+	const displayResults = results => {console.log(results);
 
 		let list; // Reusable list (add items here)
 
