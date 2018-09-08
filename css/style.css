@@ -98,7 +98,7 @@ body {
 	/*****************/
 
 	/* Grid 1x2: Spotify Search */
-	form#spotify-search { grid-area: search-form; }
+	form#spotify-search { grid-area: spotify-search; }
 		input#spotify-search-input {
 			display: block; float: left;
 			width: 80%; height: 100%;
