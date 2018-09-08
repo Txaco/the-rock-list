@@ -169,6 +169,11 @@ body {
 	ul#spotify-track-results-list { background-color: var(--yellow); }
 	ul#spotify-artist-results-list { background-color: var(--blue); }
 	ul#spotify-album-results-list { background-color: var(--green); }
+	/* Set checked results list */
+	input#spotify-track-results-button:checked ~ ul#spotify-track-results-list,
+	input#spotify-artist-results-button:checked ~ ul#spotify-artist-results-list,
+	input#spotify-album-results-button:checked ~ ul#spotify-album-results-list { z-index: 2; }
+	
 		li.spotify-no-results {
 			margin-top: 2rem;
 			text-align: center;
