@@ -177,6 +177,7 @@ body {
 		overflow: auto;
 		z-index: 1; visibility: hidden;
 		color: var(--black);
+		transition: visibility .2s;
 	}
 	ul#spotify-track-results-list { border-radius: 0 .2rem 0 0; background-color: var(--red); }
 	ul#spotify-artist-results-list { border-radius: .2rem .2rem 0 0; background-color: var(--green); }
