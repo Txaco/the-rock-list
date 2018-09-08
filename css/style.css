@@ -175,9 +175,9 @@ body {
 		grid-area: spotify-results-list;
 		padding: 0 1rem; border-top: solid 1rem transparent; box-sizing: border-box;
 		overflow: auto;
-		z-index: 1; visibility: hidden;
+		z-index: 1; opacity: 0;
 		color: var(--black);
-		transition: visibility .2s;
+		transition: opacity .2s;
 	}
 	ul#spotify-track-results-list { border-radius: 0 .2rem 0 0; background-color: var(--red); }
 	ul#spotify-artist-results-list { border-radius: .2rem .2rem 0 0; background-color: var(--green); }
@@ -185,7 +185,7 @@ body {
 	/* Set checked results list */
 	input#spotify-track-results-button:checked ~ ul#spotify-track-results-list,
 	input#spotify-artist-results-button:checked ~ ul#spotify-artist-results-list,
-	input#spotify-album-results-button:checked ~ ul#spotify-album-results-list { z-index: 2; visibility: visible; }
+	input#spotify-album-results-button:checked ~ ul#spotify-album-results-list { z-index: 2; opacity: 1; }
 	
 		li.spotify-no-results {
 			margin-top: 2rem;
