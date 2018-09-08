@@ -247,7 +247,7 @@ let THE_ROCK_LIST = ( WINDOW => {
 					// Add track to list - set <li> item data-id attribute to Spotify track id
 					list += `
 
-						<li class="spotify-result" data-id="${item.id}">
+						<li class="spotify-result" data-id="${track.id}">
 
 							<img src="${imageSrc}" alt="Track Image" />
 							<div>
