@@ -283,23 +283,23 @@ let THE_ROCK_LIST = ( WINDOW => {
 				let imageSrc, genres; // Declare reusable variables for looping
 
 				// Loop ertist results
-				for(let item of results.artists.items) {
+				for(let artist of results.artists.items) {
 
 					// If artist has images, set imageSrc to max resolution image (first in array), if not, set it to fallback
-					imageSrc = item.images.length ? item.images[0].url : MAIN_DATA.fallbackImageUri;
+					imageSrc = artist.images.length ? artist.images[0].url : MAIN_DATA.fallbackImageUri;
 
-					genres = item.genres.map(genre => genre.toUpperCase()).join(', '); // Get artist genres, if any
+					genres = artist.genres.map(genre => genre.toUpperCase()).join(', '); // Get artist genres, if any
 					genres = genres ? `Estilo: <span>${genres}</span>`: 'No tiene estilo'; // Set artist genres or fallback
 
 					// Add artists to list
-					listTemplate += `
+					list += `
 
 						<li class="spotify-result">
 
 							<img src="${imageSrc}" alt="Artist Image" />
 							<div>
-								<h5 class="spotify-result-info pos-top">Popularidad:&nbsp;${item.popularity}</h5>
-								<h4 class="spotify-result-info pos-mid">${item.name}</h4>
+								<h5 class="spotify-result-info pos-top">Popularidad:&nbsp;${artist.popularity}</h5>
+								<h4 class="spotify-result-info pos-mid">${artist.name}</h4>
 								<h6 class="spotify-result-info pos-bot">${genres}</h6>
 							</div>
 
