@@ -373,3 +373,12 @@ let THE_ROCK_LIST = ( WINDOW => {
 	WINDOW.document.addEventListener('DOMContentLoaded', EVENT_LISTENERS.initialize);
 
 })(window);
+
+/*
+
+	https://api.genius.com/oauth/authorize?
+		client_id=[?]&
+		redirect_uri=https://the-rock-list.netlify.com&
+		response_type=token
+
+*/
