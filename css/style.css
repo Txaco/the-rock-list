@@ -44,7 +44,7 @@ html {
 	font-stretch: normal;
 	font-size: 1.25vw;
 	line-height: normal;
-	font-family: 'Raleway';
+	font-family: 'Arial';
 }
 
 /* Set document dimensions (full width and height) */
@@ -66,10 +66,10 @@ body {
 		grid-area: app-logo;
 		display: flex; justify-content: space-evenly; align-items: center;
 	}
-		header#app-logo > h1 { font-size: 4rem; font-weight: 900; }
+		header#app-logo > h1 { font: 900 4rem 'Raleway'; }
 		header#app-logo > h2 {
 			display: flex; flex-direction: column; align-items: center;
-			font-size: 1.4rem; font-weight: 300;
+			font: 300 1.4rem 'Raleway';
 		}
 
 	/* Grid 2x1: User List Title */
@@ -89,6 +89,7 @@ body {
 		overflow: auto;
 		z-index: 1;
 		font-size: 2rem; font-weight: 900;
+		text-transform: uppercase;
 		background-color: var(--white); color: var(--black);
 	}
 		ul#user-list > li {
@@ -108,7 +109,8 @@ body {
 		input#spotify-search-input {
 			display: block; float: left;
 			width: 80%; height: 100%;
-			font-size: 3rem; font-weight: 900;
+			font: 900 3rem 'Source Code Pro';
+			text-transform: uppercase;
 			padding: 1rem; box-sizing: border-box;
 			border-bottom-left-radius: .2rem; border-bottom-right-radius: .2rem;
 			background-color: var(--white); color: var(--black);
@@ -142,7 +144,7 @@ body {
 	nav#spotify-results-nav {
 		grid-area: spotify-results-nav;
 		display: flex; align-items: flex-end;
-		font-size: 1.7rem; font-weight: 700;
+		font: 700 1.7rem 'Raleway';
 	}
 		nav#spotify-results-nav > label {
 			height: calc(100% - 2rem);
@@ -172,7 +174,10 @@ body {
 		z-index: 1;
 		color: var(--black);
 	}
-	ul#spotify-track-results-list { background-color: var(--red); }
+	ul#spotify-track-results-list {
+		border-top-left-radius: none;
+		background-color: var(--red);
+	}
 	ul#spotify-artist-results-list { background-color: var(--green); }
 	ul#spotify-album-results-list { background-color: var(--yellow); }
 	/* Set checked results list */
@@ -191,6 +196,8 @@ body {
 			margin: 1rem 0;
 			display: flex; flex-flow: row nowrap;
 			background: var(--white); color: var(--black);
+			font-family: 'Source Code Pro';
+			text-transform: uppercase;
 		}
 			li.spotify-result > img {
 				display: block;
@@ -202,13 +209,7 @@ body {
 				white-space: nowrap; overflow: hidden;
 			}
 				.spotify-result-info { overflow: hidden; text-overflow: ellipsis; }
-				.spotify-result-info.pos-top {
-					font-size: 1.5rem; font-weight: 500;
-					text-transform: uppercase;
-				}
-				.spotify-result-info.pos-mid { font-size: 2rem; font-weight: 900; }
-				.spotify-result-info.pos-bot { font-size: 1rem; font-weight: 300; }
-					.spotify-result-info.pos-bot > span {
-						font-weight: 700;
-						text-transform: uppercase;
-					}
+				.spotify-result-info.pos-top { font-weight: 500; font-size: 1.5rem; }
+				.spotify-result-info.pos-mid { font-weight: 900; font-size: 2rem; }
+				.spotify-result-info.pos-bot { font-weight: 300; font-size: 1rem; }
+					.spotify-result-info.pos-bot > span { font-weight: 700; }
