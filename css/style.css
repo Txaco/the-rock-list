@@ -1,3 +1,5 @@
+body { display: none; }
+
 /* Reset elements - input, button inherit font from parent */
 body, h1, h2, h3, h4, h5, h6, p, ul { margin: 0; }
 input, button, ul { padding: 0; }
@@ -44,7 +46,7 @@ html {
 	font-stretch: normal;
 	font-size: 1.25vw;
 	line-height: normal;
-	font-family: 'Arial';
+	font-family: 'Arial'; /* Default FONT FAMILY */
 }
 
 /* Set document dimensions (full width and height) */
@@ -54,7 +56,6 @@ html, body { width: 100%; height: 100%;	}
 body {
 	grid: 'app-logo spotify-search' 10% 'user-list-title spotify-results-nav' 10% 'user-list spotify-results-list' 80% / 50% 50%;
 	background-color: var(--black); color: var(--white);
-	display: none;
 }
 
 	/****************/
@@ -211,5 +212,5 @@ body {
 				.spotify-result-info { overflow: hidden; text-overflow: ellipsis; }
 				.spotify-result-info.pos-top { font-weight: 500; font-size: 1.5rem; }
 				.spotify-result-info.pos-mid { font-weight: 900; font-size: 2rem; }
-				.spotify-result-info.pos-bot { font-weight: 300; font-size: 1rem; }
+				.spotify-result-info.pos-bot { font-weight: 500; font-size: 1rem; }
 					.spotify-result-info.pos-bot > span { font-weight: 700; }
