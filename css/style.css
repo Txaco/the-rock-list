@@ -167,6 +167,7 @@ body {
 	ul.spotify-results-list {
 		grid-area: spotify-results-list;
 		padding: 0 1rem; box-sizing: border-box;
+		border-top-left-radius: .2rem;
 		overflow: auto;
 		z-index: 1;
 		color: var(--black);
@@ -190,7 +191,6 @@ body {
 			margin: 1rem 0;
 			display: flex; flex-flow: row nowrap;
 			background: var(--white); color: var(--black);
-			box-shadow: 0 3px 6px rgba(48, 48, 48, .16), 0 3px 6px rgba(48, 48, 48, .23);
 		}
 			li.spotify-result > img {
 				display: block;
