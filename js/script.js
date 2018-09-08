@@ -322,6 +322,8 @@ let THE_ROCK_LIST = ( WINDOW => {
 		
 			// If not empty array, add albums to list
 			if(results.albums.items.length) {
+				
+				list = ''; // Reset list
 
 				let imageSrc, artistNames, type, info; // Declare reusable variables for looping
 
@@ -338,7 +340,6 @@ let THE_ROCK_LIST = ( WINDOW => {
 					type = type.charAt(0).toUpperCase() + type.substr(1).toLowerCase(); // Titlecase album type
 
 					info = `${type} &copysr; <span>${album.release_date}</span>`; // Get album info
-console.log(list);
 
 					// Add albums to list
 					list += `
